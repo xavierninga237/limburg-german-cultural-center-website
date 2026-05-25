@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Limburg — Deutsches Kulturzentrum Limbe</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+/* =============================================
+   VARIABLES
+   ============================================= */
+:root{
+  --red:#C41E3A;
+  --red2:#E8324F;
+  --gold:#C9A84C;
+  --gold2:#E8C878;
+  --black:#080808;
+  --black2:#111111;
+  --black3:#1a1a1a;
+  --white:#F8F6F1;
+  --off:#EEEAE2;
+  --gray:#6B6660;
+  --border:rgba(255,255,255,0.08);
+  --border-light:rgba(0,0,0,0.08);
+  --cm-green:#007A5E;
+  --cm-red:#CE1126;
+  --cm-yellow:#FCD116;
+}
+
+/* =============================================
+   RESET & BASE
+   ============================================= */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Outfit',sans-serif;background:var(--white);color:var(--black);overflow-x:hidden}
+img{display:block;width:100%;height:100%;object-fit:cover}
+
+/* =============================================
+   NAVIGATION
+   ============================================= */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:76px;display:flex;align-items:center;
+  justify-content:space-between;padding:0 4%;
+  background:rgba(8,8,8,0.97);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;flex-shrink:0}
+.logo-emblem{
+  width:40px;height:40px;border:1px solid var(--red);
+  display:flex;align-items:center;justify-content:center;position:relative
+}
+.logo-emblem span{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--white)}
+.logo-emblem::before{content:'';position:absolute;inset:3px;border:1px solid rgba(196,30,58,0.3)}
+.logo-text{color:var(--white)}
+.logo-text strong{display:block;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase}
+.logo-text span{font-size:9px;color:rgba(255,255,255,0.4);letter-spacing:0.08em;text-transform:uppercase}
+
+.nav-menu{display:flex;gap:20px;list-style:none}
+.nav-menu a{
+  color:rgba(255,255,255,0.6);text-decoration:none;font-size:11px;
+  font-weight:400;letter-spacing:0.06em;text-transform:uppercase;
+  transition:color 0.2s;position:relative;white-space:nowrap
+}
+.nav-menu a::after{
+  content:'';position:absolute;bottom:-4px;left:0;right:0;
+  height:1px;background:var(--red);
+  transform:scaleX(0);transform-origin:left;transition:transform 0.3s
+}
+.nav-menu a:hover{color:#fff}
+.nav-menu a:hover::after{transform:scaleX(1)}
+
+.nav-right{display:flex;gap:8px;align-items:center;flex-shrink:0}
+.nav-btn{
+  background:transparent;border:1px solid var(--red);
+  color:var(--white);padding:8px 18px;font-size:10px;font-weight:500;
+  letter-spacing:0.1em;text-transform:uppercase;
+  font-family:'Outfit',sans-serif;cursor:pointer;
+  transition:all 0.3s;position:relative;overflow:hidden;
+  text-decoration:none;display:inline-block;white-space:nowrap
+}
+.nav-btn::before{
+  content:'';position:absolute;inset:0;background:var(--red);
+  transform:scaleX(0);transform-origin:left;transition:transform 0.3s;z-index:-1
+}
+.nav-btn:hover{color:#fff}
+.nav-btn:hover::before{transform:scaleX(1)}
+.nav-donate{
+  background:var(--gold);color:var(--black);
+  padding:8px 18px;font-size:10px;font-weight:700;
+  letter-spacing:0.1em;text-transform:uppercase;
+  text-decoration:none;display:inline-block;
+  transition:background 0.3s;white-space:nowrap
+}
+.nav-donate:hover{background:var(--gold2)}
+
+/* hamburger — visible only mobile */
+.nav-hamburger{
+  display:none;flex-direction:column;gap:5px;
+  background:none;border:none;cursor:pointer;padding:6px;flex-shrink:0
+}
+.nav-hamburger span{display:block;width:22px;height:1.5px;background:#fff;transition:all 0.3s}
+
+/* =============================================
+   HERO
+   ============================================= */
+.hero{
+  min-height:100vh;background:var(--black);
+  display:flex;align-items:center;
+  position:relative;overflow:hidden;
+  padding-top:76px
+}
+.hero-geo{position:absolute;inset:0;opacity:0.04;pointer-events:none}
+.hero-geo svg{width:100%;height:100%}
+.hero-flag{position:absolute;right:0;top:0;bottom:0;width:6px;display:flex;flex-direction:column}
+.hero-flag div{flex:1}
+.hero-flag .f1{background:var(--black2)}
+.hero-flag .f2{background:var(--red)}
+.hero-flag .f3{background:var(--gold)}
+.hero-line{
+  position:absolute;left:6%;top:0;bottom:0;width:1px;
+  background:linear-gradient(to bottom,transparent,rgba(196,30,58,0.3),transparent)
+}
+.hero-content{position:relative;z-index:2;padding:60px 6%;width:100%}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;margin-bottom:32px}
+.hero-tag-dot{width:6px;height:6px;border-radius:50%;background:var(--red);flex-shrink:0}
+.hero-tag-text{
+  font-size:10px;letter-spacing:0.18em;text-transform:uppercase;
+  color:rgba(255,255,255,0.5);font-weight:400;
+  background:rgba(196,30,58,0.12);border:1px solid rgba(196,30,58,0.25);
+  padding:5px 12px
+}
+.hero-headline{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(52px,8.5vw,110px);
+  font-weight:300;line-height:0.95;color:var(--white);margin-bottom:32px
+}
+.hero-headline em{font-style:italic;color:var(--red2)}
+.hero-headline strong{font-weight:700;display:block}
+.hero-body{
+  font-size:15px;color:rgba(255,255,255,0.5);
+  line-height:1.8;max-width:460px;margin-bottom:48px;font-weight:300
+}
+.hero-actions{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.hero-counter{
+  position:absolute;bottom:60px;right:6%;
+  display:flex;gap:48px
+}
+.hero-stat strong{
+  display:block;font-family:'Cormorant Garamond',serif;
+  font-size:44px;font-weight:600;color:var(--white);line-height:1
+}
+.hero-stat span{
+  font-size:10px;letter-spacing:0.1em;
+  text-transform:uppercase;color:rgba(255,255,255,0.3)
+}
+.hero-scroll{
+  position:absolute;bottom:32px;left:6%;
+  display:flex;align-items:center;gap:12px;
+  color:rgba(255,255,255,0.25);font-size:10px;
+  letter-spacing:0.1em;text-transform:uppercase
+}
+.scroll-line{width:40px;height:1px;background:rgba(255,255,255,0.2)}
+
+/* =============================================
+   SHARED BUTTONS
+   ============================================= */
+.btn-red{
+  display:inline-block;background:var(--red);color:#fff;
+  padding:14px 36px;font-size:11px;font-weight:600;
+  letter-spacing:0.12em;text-transform:uppercase;
+  text-decoration:none;transition:background 0.3s
+}
+.btn-red:hover{background:var(--red2)}
+.btn-ghost{
+  display:inline-block;color:rgba(255,255,255,0.55);
+  font-size:11px;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;
+  text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.2);
+  padding-bottom:2px;transition:all 0.3s
+}
+.btn-ghost:hover{color:#fff;border-color:rgba(255,255,255,0.6)}
+.btn-outline{
+  display:inline-block;border:1px solid var(--border-light);
+  color:var(--black);padding:13px 28px;font-size:11px;font-weight:500;
+  letter-spacing:0.1em;text-transform:uppercase;
+  text-decoration:none;transition:all 0.3s
+}
+.btn-outline:hover{background:var(--black);color:#fff;border-color:var(--black)}
+.btn-white-outline{
+  display:inline-block;border:1px solid rgba(255,255,255,0.5);
+  color:#fff;padding:14px 36px;font-size:11px;font-weight:500;
+  letter-spacing:0.12em;text-transform:uppercase;
+  text-decoration:none;transition:all 0.3s;white-space:nowrap;text-align:center
+}
+.btn-white-outline:hover{background:#fff;color:var(--red)}
+.btn-white-solid{
+  display:block;width:100%;background:#fff;color:var(--red);
+  padding:13px;font-size:11px;font-weight:700;
+  letter-spacing:0.12em;text-transform:uppercase;
+  text-decoration:none;transition:all 0.3s;border:none;cursor:pointer;
+  font-family:'Outfit',sans-serif;text-align:center
+}
+.btn-white-solid:hover{background:var(--black);color:#fff}
+.btn-donate{
+  display:inline-block;background:var(--gold);color:var(--black);
+  padding:14px 36px;font-size:11px;font-weight:700;
+  letter-spacing:0.12em;text-transform:uppercase;
+  text-decoration:none;transition:all 0.3s
+}
+.btn-donate:hover{background:var(--gold2)}
+
+/* =============================================
+   SHARED SECTION STYLES
+   ============================================= */
+section{padding:120px 6%}
+.s-label{
+  font-size:10px;letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--red);display:flex;align-items:center;
+  gap:12px;margin-bottom:16px;font-weight:500
+}
+.s-label::before{content:'';width:24px;height:1px;background:var(--red)}
+.s-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(32px,5vw,60px);font-weight:300;
+  line-height:1.05;color:var(--black);margin-bottom:20px
+}
+.s-title em{font-style:italic;color:var(--red)}
+.s-sub{font-size:15px;color:var(--gray);line-height:1.8;font-weight:300;max-width:520px}
+
+/* =============================================
+   SERVICES
+   ============================================= */
+.services-bg{background:var(--white)}
+.services-top{
+  display:flex;justify-content:space-between;
+  align-items:flex-end;margin-bottom:72px;flex-wrap:wrap;gap:24px
+}
+.services-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:var(--off)
+}
+.svc{
+  background:var(--white);position:relative;
+  overflow:hidden;display:flex;flex-direction:column;
+  transition:background 0.4s,transform 0.3s
+}
+.svc::before{
+  content:'';position:absolute;bottom:0;left:0;right:0;
+  height:2px;background:var(--red);
+  transform:scaleX(0);transform-origin:left;transition:transform 0.4s;z-index:2
+}
+.svc:hover{background:var(--black);transform:translateY(-4px)}
+.svc:hover::before{transform:scaleX(1)}
+.svc:hover .svc-n{color:rgba(255,255,255,0.05)}
+.svc:hover .svc-title{color:#fff}
+.svc:hover .svc-desc{color:rgba(255,255,255,0.4)}
+.svc-n{
+  font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:700;
+  color:var(--off);position:absolute;top:172px;right:14px;
+  line-height:1;transition:color 0.4s;user-select:none;z-index:1
+}
+/* IMAGE SLOT — replace contents with <img src="..." alt="..."> */
+.svc-img{
+  width:100%;height:175px;background:var(--off);
+  overflow:hidden;flex-shrink:0;position:relative
+}
+.svc-img-label{
+  position:absolute;inset:0;display:flex;align-items:center;
+  justify-content:center;font-size:10px;letter-spacing:0.12em;
+  text-transform:uppercase;color:rgba(0,0,0,0.18);pointer-events:none
+}
+.svc:hover .svc-img{filter:brightness(0.35)}
+.svc-body{padding:22px 24px 28px;flex:1;position:relative;z-index:1}
+.svc-title{font-size:14px;font-weight:600;margin-bottom:8px;transition:color 0.4s}
+.svc-desc{font-size:12px;color:var(--gray);line-height:1.65;font-weight:300;transition:color 0.4s}
+
+/* =============================================
+   WHY CHOOSE
+   ============================================= */
+.why{background:var(--black2);overflow:hidden;position:relative}
+.why::before{
+  content:'DEUTSCHLAND';
+  position:absolute;right:-40px;top:50%;transform:translateY(-50%);
+  font-family:'Cormorant Garamond',serif;font-size:160px;font-weight:700;
+  color:rgba(255,255,255,0.02);white-space:nowrap;letter-spacing:0.1em;pointer-events:none
+}
+.why-inner{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center}
+.why .s-title{color:var(--white)}
+.why .s-sub{color:rgba(255,255,255,0.4)}
+.why-list{margin-top:48px}
+.why-item{
+  display:grid;grid-template-columns:40px 1fr;gap:16px;
+  padding:24px 0;border-bottom:1px solid rgba(255,255,255,0.06)
+}
+.why-item:first-child{border-top:1px solid rgba(255,255,255,0.06)}
+.why-num{font-family:'Cormorant Garamond',serif;font-size:13px;color:var(--red);font-weight:600;padding-top:2px}
+.why-item-title{font-size:14px;font-weight:500;color:var(--white);margin-bottom:5px}
+.why-item-desc{font-size:13px;color:rgba(255,255,255,0.35);line-height:1.65;font-weight:300}
+.why-visual{position:relative}
+.why-box{
+  background:var(--black3);border:1px solid rgba(255,255,255,0.06);
+  padding:52px 44px;position:relative
+}
+.why-accent{position:absolute;top:-1px;left:-1px;right:-1px;height:2px;background:linear-gradient(to right,var(--red),transparent)}
+.why-box-quote{font-family:'Cormorant Garamond',serif;font-size:12px;color:rgba(255,255,255,0.3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:20px}
+.why-box-text{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:var(--white);line-height:1.5;font-style:italic;margin-bottom:28px}
+.why-box-attr{font-size:11px;color:rgba(255,255,255,0.25);letter-spacing:0.08em;text-transform:uppercase}
+.why-stat-row{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,0.06);margin-top:1px}
+.why-stat{background:var(--black3);padding:26px 28px}
+.why-stat strong{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:600;color:var(--white);display:block;line-height:1}
+.why-stat span{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.3)}
+
+/* =============================================
+   GERMAN LANGUAGE SECTION
+   ============================================= */
+.bootcamp{background:var(--red);padding:80px 6%;position:relative;overflow:hidden}
+.bootcamp::after{
+  content:'SPRACHE';position:absolute;right:-20px;top:50%;transform:translateY(-50%);
+  font-family:'Cormorant Garamond',serif;font-size:140px;font-weight:700;
+  color:rgba(255,255,255,0.05);white-space:nowrap;pointer-events:none
+}
+.bootcamp-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;position:relative;z-index:1}
+.bootcamp .s-label{color:rgba(255,255,255,0.6)}
+.bootcamp .s-label::before{background:rgba(255,255,255,0.5)}
+.bootcamp .s-title{color:#fff}
+.bootcamp .s-sub{color:rgba(255,255,255,0.7);max-width:100%}
+.bootcamp-reasons{margin-top:32px}
+.bootcamp-reason{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.15)
+}
+.bootcamp-reason:first-child{border-top:1px solid rgba(255,255,255,0.15)}
+.bootcamp-reason-icon{
+  width:32px;height:32px;border-radius:50%;
+  background:rgba(255,255,255,0.15);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;flex-shrink:0
+}
+.bootcamp-reason-title{font-size:14px;font-weight:600;color:#fff;margin-bottom:3px}
+.bootcamp-reason-desc{font-size:13px;color:rgba(255,255,255,0.65);line-height:1.5;font-weight:300}
+.bootcamp-right{display:flex;flex-direction:column;gap:20px}
+.bootcamp-card{
+  background:rgba(255,255,255,0.1);
+  border:1px solid rgba(255,255,255,0.2);padding:28px
+}
+.bootcamp-card-title{font-size:12px;font-weight:600;color:#fff;margin-bottom:8px;letter-spacing:0.06em;text-transform:uppercase}
+.bootcamp-card-text{font-size:13px;color:rgba(255,255,255,0.65);line-height:1.6;font-weight:300;margin-bottom:12px}
+.bootcamp-schedule{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.schedule-tag{
+  background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);
+  color:rgba(255,255,255,0.85);padding:5px 14px;
+  font-size:11px;letter-spacing:0.08em;text-transform:uppercase;font-weight:500
+}
+.bootcamp-online{background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.2);padding:28px}
+.bootcamp-online-title{font-size:15px;font-weight:600;color:#fff;margin-bottom:8px}
+.bootcamp-online-desc{font-size:13px;color:rgba(255,255,255,0.65);line-height:1.6;margin-bottom:20px;font-weight:300}
+.bootcamp-online input,
+.bootcamp-online select{
+  width:100%;padding:11px 14px;margin-bottom:10px;
+  border:1px solid rgba(255,255,255,0.2);
+  background:rgba(255,255,255,0.08);color:#fff;
+  font-size:13px;font-family:'Outfit',sans-serif;outline:none
+}
+.bootcamp-online input::placeholder{color:rgba(255,255,255,0.4)}
+.bootcamp-online select option{background:var(--black2);color:#fff}
+
+/* =============================================
+   MEMBERSHIP — 2 cards
+   ============================================= */
+.membership{background:var(--off)}
+.membership-top{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:72px;flex-wrap:wrap;gap:24px}
+.pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:860px;margin:0 auto}
+.price-card{
+  background:var(--white);border:1px solid var(--border-light);
+  padding:44px 36px;position:relative;transition:transform 0.3s
+}
+.price-card:hover{transform:translateY(-6px)}
+.price-card.featured{background:var(--black);border-color:transparent}
+.price-card.featured .price-name{color:rgba(255,255,255,0.5)}
+.price-card.featured .price-amount{color:#fff}
+.price-card.featured .price-period{color:rgba(255,255,255,0.3)}
+.price-card.featured .price-desc{color:rgba(255,255,255,0.45);border-color:rgba(255,255,255,0.07)}
+.price-card.featured .price-feature{color:rgba(255,255,255,0.6);border-color:rgba(255,255,255,0.07)}
+.price-card.featured .price-feature::before{color:var(--gold)}
+.price-top-bar{height:3px;background:var(--off);margin:-44px -36px 36px}
+.price-card.featured .price-top-bar{background:linear-gradient(to right,var(--red),var(--gold))}
+.price-badge{
+  position:absolute;top:28px;right:28px;background:var(--red);
+  color:#fff;font-size:9px;font-weight:600;letter-spacing:0.1em;
+  text-transform:uppercase;padding:4px 10px
+}
+.price-icon{font-size:28px;margin-bottom:20px}
+.price-name{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray);margin-bottom:8px}
+.price-amount{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:600;color:var(--black);line-height:1;margin-bottom:4px}
+.price-amount sup{font-size:18px;vertical-align:top;margin-top:10px;display:inline-block;font-family:'Outfit',sans-serif;font-weight:400}
+.price-period{font-size:12px;color:var(--gray);margin-bottom:16px}
+.price-desc{font-size:13px;color:var(--gray);line-height:1.6;font-weight:300;margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid var(--border-light)}
+.price-features{list-style:none;margin-bottom:36px}
+.price-feature{font-size:13px;color:var(--gray);padding:9px 0;border-bottom:1px solid var(--border-light);display:flex;align-items:center;gap:10px;font-weight:300}
+.price-feature::before{content:'✓';color:var(--red);font-weight:700;flex-shrink:0;font-size:12px}
+.price-cta{display:block;text-align:center;padding:13px;font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;border:1px solid var(--border-light);color:var(--black);transition:all 0.3s}
+.price-cta:hover{background:var(--black);color:#fff;border-color:var(--black)}
+.price-card.featured .price-cta{background:var(--red);color:#fff;border-color:var(--red)}
+.price-card.featured .price-cta:hover{background:var(--red2)}
+
+/* =============================================
+   HERITAGE / TOURISM
+   ============================================= */
+.heritage{background:var(--white)}
+.heritage-top{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:72px;flex-wrap:wrap;gap:24px}
+.heritage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.hcard{position:relative;overflow:hidden;cursor:pointer}
+/* IMAGE SLOT */
+.hcard-img{
+  width:100%;height:300px;background:var(--off);
+  overflow:hidden;position:relative;transition:transform 0.5s ease
+}
+.hcard-img-label{
+  position:absolute;inset:0;display:flex;align-items:center;
+  justify-content:center;font-size:10px;letter-spacing:0.1em;
+  text-transform:uppercase;color:rgba(0,0,0,0.2);pointer-events:none
+}
+.hcard:hover .hcard-img{transform:scale(1.04)}
+.hcard-arrow{
+  position:absolute;top:16px;right:16px;z-index:2;
+  width:34px;height:34px;background:rgba(255,255,255,0.92);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;color:var(--black);transition:all 0.3s
+}
+.hcard:hover .hcard-arrow{background:var(--red);color:#fff}
+.hcard-content{padding:18px 2px 8px}
+.hcard-num{font-size:10px;color:var(--gray);letter-spacing:0.1em;margin-bottom:6px}
+.hcard-title{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:400;color:var(--black);margin-bottom:6px;line-height:1.3}
+.hcard-desc{font-size:13px;color:var(--gray);font-weight:300;line-height:1.5}
+
+/* =============================================
+   TESTIMONIALS
+   ============================================= */
+.testimonials{background:var(--black)}
+.testimonials .s-title{color:var(--white)}
+.testimonials .s-sub{color:rgba(255,255,255,0.35)}
+.testi-top{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:72px;flex-wrap:wrap;gap:24px}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.06)}
+.tcard{background:var(--black);padding:40px 32px;transition:background 0.3s}
+.tcard:hover{background:var(--black3)}
+.tcard-stars{display:flex;gap:3px;margin-bottom:20px}
+.tcard-star{width:12px;height:12px;background:var(--gold);clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+.tcard-text{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;color:rgba(255,255,255,0.65);line-height:1.7;font-style:italic;margin-bottom:28px}
+.tcard-author{display:flex;align-items:center;gap:14px}
+.tcard-av{width:38px;height:38px;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#fff;flex-shrink:0}
+.tcard-name{font-size:13px;font-weight:500;color:#fff}
+.tcard-role{font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:0.04em}
+
+/* =============================================
+   NEWS
+   ============================================= */
+.news{background:var(--white)}
+.news-top{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:72px;flex-wrap:wrap;gap:24px}
+.news-grid{display:grid;grid-template-columns:5fr 3fr;gap:24px}
+.news-featured{
+  background:var(--black);padding:56px 48px;position:relative;
+  overflow:hidden;min-height:440px;display:flex;
+  flex-direction:column;justify-content:flex-end
+}
+.news-featured::before{content:'';position:absolute;inset:0;background:linear-gradient(160deg,#1a0505,#080808)}
+.news-featured-tag{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--red2);margin-bottom:12px;position:relative}
+.news-featured-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:#fff;margin-bottom:12px;line-height:1.3;position:relative}
+.news-featured-text{font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7;font-weight:300;position:relative}
+.news-side{display:flex;flex-direction:column;gap:1px;background:var(--off)}
+.ncard{background:var(--white);padding:24px;transition:background 0.2s}
+.ncard:hover{background:var(--black)}
+.ncard:hover .ncard-title{color:#fff}
+.ncard:hover .ncard-date{color:rgba(255,255,255,0.3)}
+.ncard-date{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray);margin-bottom:8px;transition:color 0.2s}
+.ncard-title{font-size:14px;font-weight:500;color:var(--black);line-height:1.5;transition:color 0.2s}
+
+/* =============================================
+   VISIT / CONTACT
+   ============================================= */
+.visit{background:var(--off)}
+.visit-inner{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(0,0,0,0.06);margin-top:72px}
+.vblock{background:var(--off);padding:40px 36px}
+.vblock h4{font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:20px}
+.vblock p,.vblock a{font-size:14px;color:var(--black);line-height:2;font-weight:300}
+.vblock a{color:var(--red);text-decoration:none}
+.vblock a:hover{text-decoration:underline}
+
+/* =============================================
+   DONATE SECTION
+   ============================================= */
+.donate-section{background:var(--black2);padding:80px 6%}
+.donate-inner{display:flex;justify-content:space-between;align-items:center;gap:48px;flex-wrap:wrap}
+.donate-section .s-label{color:var(--gold)}
+.donate-section .s-label::before{background:var(--gold)}
+.donate-section .s-title{color:var(--white)}
+.donate-section .s-title em{color:var(--gold)}
+
+/* =============================================
+   FOOTER
+   ============================================= */
+footer{background:var(--black);padding:80px 6% 36px}
+.footer-top{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:60px;padding-bottom:60px;border-bottom:1px solid var(--border)
+}
+.footer-brand p{font-size:13px;color:rgba(255,255,255,0.3);line-height:1.8;font-weight:300;margin-top:20px;max-width:280px}
+.footer-col h5{font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:20px}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:12px}
+.footer-col ul li a{font-size:13px;color:rgba(255,255,255,0.45);text-decoration:none;transition:color 0.2s;font-weight:300}
+.footer-col ul li a:hover{color:#fff}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:32px;flex-wrap:wrap;gap:12px}
+.footer-bottom p{font-size:11px;color:rgba(255,255,255,0.2);letter-spacing:0.04em}
+.footer-flags{display:flex;align-items:center;gap:16px}
+.flag{display:flex;gap:3px;align-items:center}
+.flag span{width:18px;height:5px;border-radius:1px}
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+@media(max-width:1100px){
+  .nav-menu{gap:14px}
+  .nav-menu a{font-size:10px}
+}
+@media(max-width:1024px){
+  .services-grid{grid-template-columns:repeat(2,1fr)}
+  .why-inner{grid-template-columns:1fr}
+  .why::before{display:none}
+  .bootcamp-inner{grid-template-columns:1fr;gap:40px}
+  .footer-top{grid-template-columns:1fr 1fr}
+}
+@media(max-width:900px){
+  .nav-menu{display:none}
+  .nav-right{display:none}
+  .nav-hamburger{display:flex}
+}
+@media(max-width:768px){
+  section{padding:80px 5%}
+  .pricing-grid{grid-template-columns:1fr;max-width:100%}
+  .heritage-grid{grid-template-columns:1fr 1fr}
+  .testi-grid{grid-template-columns:1fr}
+  .news-grid{grid-template-columns:1fr}
+  .visit-inner{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr}
+  .hero-counter{position:static;margin-top:40px;flex-wrap:wrap;gap:28px}
+  .hero-scroll{display:none}
+  .donate-inner{flex-direction:column;align-items:flex-start}
+  .bootcamp{padding:60px 5%}
+  .news-featured{padding:36px 28px;min-height:320px}
+}
+@media(max-width:480px){
+  .services-grid{grid-template-columns:1fr}
+  .heritage-grid{grid-template-columns:1fr}
+  .hero-headline{font-size:44px}
+  .why-box{padding:36px 24px}
+}
+
+</style>
+</head>
+<body>
+
+<!--
+VERCEL IMAGE FIX:
+1. Put all images inside assets/images/
+2. Use lowercase filenames only
+3. Keep exact same names as referenced below
+4. Recommended format: .jpg or .png
+-->
+
+
+<!-- ==================== NAVIGATION ==================== -->
+<nav id="navbar">
+
+  <a class="nav-logo" href="index.html">
+    <div class="logo-emblem"><span>L</span></div>
+    <div class="logo-text">
+      <strong>Limburg</strong>
+      <span>German Cultural Center</span>
+    </div>
+  </a>
+
+  <ul class="nav-menu">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="pages/german-language.html">German Language</a></li>
+    <li><a href="pages/services.html">Services</a></li>
+    <li><a href="pages/about.html">About</a></li>
+    <li><a href="pages/heritage.html">Heritage</a></li>
+    <li><a href="pages/news.html">News</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <a href="pages/german-language.html#register" class="nav-btn">Enroll Now</a>
+    <a href="#donate" class="nav-donate">Donate</a>
+  </div>
+
+  <!-- Hamburger — shows on mobile -->
+  <button class="nav-hamburger" id="hamburger" aria-label="Open menu"
+    onclick="var d=document.getElementById('mobileMenu');d.style.display=d.style.display==='block'?'none':'block'">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE VERTICAL MENU DRAWER -->
+<div id="mobileMenu" style="display:none;position:fixed;top:76px;left:0;right:0;z-index:199;background:rgba(8,8,8,0.98);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.08);">
+  <ul style="list-style:none;">
+    <li style="border-bottom:1px solid rgba(255,255,255,0.07)"><a href="index.html"            onclick="document.getElementById('mobileMenu').style.display='none'" style="display:block;padding:17px 6%;color:rgba(255,255,255,0.8);text-decoration:none;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;">Home</a></li>
+    <li style="border-bottom:1px solid rgba(255,255,255,0.07)"><a href="pages/german-language.html" onclick="document.getElementById('mobileMenu').style.display='none'" style="display:block;padding:17px 6%;color:rgba(255,255,255,0.8);text-decoration:none;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;">German Language</a></li>
+    <li style="border-bottom:1px solid rgba(255,255,255,0.07)"><a href="pages/services.html"        onclick="document.getElementById('mobileMenu').style.display='none'" style="display:block;padding:17px 6%;color:rgba(255,255,255,0.8);text-decoration:none;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;">Services</a></li>
+    <li style="border-bottom:1px solid rgba(255,255,255,0.07)"><a href="pages/about.html"           onclick="document.getElementById('mobileMenu').style.display='none'" style="display:block;padding:17px 6%;color:rgba(255,255,255,0.8);text-decoration:none;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;">About</a></li>
+    <li style="border-bottom:1px solid rgba(255,255,255,0.07)"><a href="pages/heritage.html"        onclick="document.getElementById('mobileMenu').style.display='none'" style="display:block;padding:17px 6%;color:rgba(255,255,255,0.8);text-decoration:none;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;">Heritage</a></li>
+    <li style="border-bottom:1px solid rgba(255,255,255,0.07)"><a href="pages/news.html"            onclick="document.getElementById('mobileMenu').style.display='none'" style="display:block;padding:17px 6%;color:rgba(255,255,255,0.8);text-decoration:none;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;">News</a></li>
+  </ul>
+  <div style="padding:16px 6% 24px;display:flex;gap:10px;flex-wrap:wrap;">
+    <a href="pages/german-language.html#register" onclick="document.getElementById('mobileMenu').style.display='none'" style="background:transparent;border:1px solid #C41E3A;color:#fff;padding:10px 22px;font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;">Enroll Now</a>
+    <a href="#donate"     onclick="document.getElementById('mobileMenu').style.display='none'" style="background:#C9A84C;color:#080808;padding:10px 20px;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;">Donate</a>
+  </div>
+</div>
+
+
+<!-- ==================== HERO ==================== -->
+<section class="hero" id="home">
+  <div class="hero-geo">
+    <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="200" x2="1200" y2="200" stroke="white" stroke-width="0.5"/>
+      <line x1="0" y1="400" x2="1200" y2="400" stroke="white" stroke-width="0.5"/>
+      <line x1="0" y1="600" x2="1200" y2="600" stroke="white" stroke-width="0.5"/>
+      <line x1="200" y1="0" x2="200" y2="800" stroke="white" stroke-width="0.5"/>
+      <line x1="500" y1="0" x2="500" y2="800" stroke="white" stroke-width="0.5"/>
+      <line x1="900" y1="0" x2="900" y2="800" stroke="white" stroke-width="0.5"/>
+      <circle cx="200" cy="200" r="1.5" fill="white"/><circle cx="500" cy="200" r="1.5" fill="white"/>
+      <circle cx="900" cy="200" r="1.5" fill="white"/><circle cx="200" cy="400" r="1.5" fill="white"/>
+      <circle cx="500" cy="400" r="1.5" fill="white"/><circle cx="900" cy="400" r="1.5" fill="white"/>
+      <circle cx="200" cy="600" r="1.5" fill="white"/><circle cx="500" cy="600" r="1.5" fill="white"/>
+      <circle cx="900" cy="600" r="1.5" fill="white"/>
+    </svg>
+  </div>
+  <div class="hero-flag"><div class="f1"></div><div class="f2"></div><div class="f3"></div></div>
+  <div class="hero-line"></div>
+
+  <div class="hero-content">
+    <div class="hero-tag">
+      <div class="hero-tag-dot"></div>
+      <div class="hero-tag-text">Your Gateway to Germany</div>
+    </div>
+    <h1 class="hero-headline">
+      Study, Work<br>&amp; <em>Live</em><br><strong>in Germany.</strong>
+    </h1>
+    <p class="hero-body">
+      Master German Center equips, connects, and prepares you for life in
+      Germany with language training, job placement, and community support.
+    </p>
+    <div class="hero-actions">
+      <a href="pages/services.html" class="btn-red">Explore Programs</a>
+      <a href="pages/about.html" class="btn-ghost">Our Story →</a>
+    </div>
+  </div>
+
+  <div class="hero-counter">
+    <div class="hero-stat"><strong>100+</strong><span>Students trained</span></div>
+    <div class="hero-stat"><strong>98%</strong><span>Placement rate</span></div>
+    <div class="hero-stat"><strong>8</strong><span>Core services</span></div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll to explore</span>
+  </div>
+</section>
+
+
+<!-- ==================== SERVICES ==================== -->
+<section class="services-bg" id="services">
+  <div class="services-top">
+    <div>
+      <div class="s-label">What we offer</div>
+      <h2 class="s-title">Our <em>Services</em></h2>
+      <p class="s-sub">Everything you need to connect, prepare, and succeed —
+        from language to career, culture to community.</p>
+    </div>
+    <a href="pages/services.html" class="btn-outline">View All →</a>
+  </div>
+
+  <div class="services-grid">
+
+    <!-- 01 -->
+    <div class="svc">
+      <div class="svc-n">01</div>
+      <div class="svc-img">
+        <div class="svc-img-label">Image</div>
+        <img src="assets/images/services/language-class.jpg" alt="German Language School">
+      </div>
+      <div class="svc-body">
+        <div class="svc-title">German Language School</div>
+        <p class="svc-desc">A1 to B2 certified courses — Morning, Evening, Weekend and Online classes with monthly intake. Tailored for Study, Work &amp; Visa readiness.</p>
+      </div>
+    </div>
+
+    <!-- 02 -->
+    <div class="svc">
+      <div class="svc-n">02</div>
+      <div class="svc-img">
+        <div class="svc-img-label">Image</div>
+      </div>
+      <div class="svc-body">
+        <div class="svc-title">Historical Photo Gallery</div>
+        <p class="svc-desc">Exhibition of photos, artifacts &amp; paintings from the German Colonial era. Entry: 500 FCFA (children), 1,000 FCFA (adults). Free for members.</p>
+      </div>
+    </div>
+
+    <!-- 03 -->
+    <div class="svc">
+      <div class="svc-n">03</div>
+      <div class="svc-img">
+        <div class="svc-img-label">Image</div>
+      </div>
+      <div class="svc-body">
+        <div class="svc-title">Library</div>
+        <p class="svc-desc">Rich collection of German books, games, e-books and movies. A quiet research space with video documentaries running permanently.</p>
+      </div>
+    </div>
+
+    <!-- 04 -->
+    <div class="svc">
+      <div class="svc-n">04</div>
+      <div class="svc-img">
+        <div class="svc-img-label">Image</div>
+      </div>
+      <div class="svc-body">
+        <div class="svc-title">Events &amp; Conferences</div>
+        <p class="svc-desc">Monthly panel discussions on Germany, plus sociocultural, academic, and business events boosting German-Cameroon cooperation ties.</p>
+      </div>
+    </div>
+
+    <!-- 05 -->
+    <div class="svc">
+      <div class="svc-n">05</div>
+      <div class="svc-img">
+        <div class="svc-img-label">Image</div>
+      </div>
+      <div class="svc-body">
+        <div class="svc-title">Café — Haus der Freundschaft</div>
+        <p class="svc-desc">A relaxation terrace featuring German cuisine, Bundesliga on LED screens, and a daily meeting point for the community.</p>
+      </div>
+    </div>
+
+    <!-- 06 -->
+    <div class="svc">
+      <div class="svc-n">06</div>
+      <div class="svc-img">
+        <div class="svc-img-label">Image</div>
+      </div>
+      <div class="svc-body">
+        <div class="svc-title">Vocational Training</div>
+        <p class="svc-desc">Fashion design, IT, hotel management, engineering, tourism &amp; more — enabling youths to access the job market in Cameroon and Germany.</p>
+      </div>
+    </div>
+
+    <!-- 07 -->
+    <div class="svc">
+      <div class="svc-n">07</div>
+      <div class="svc-img">
+        <div class="svc-img-label">Image</div>
+      </div>
+      <div class="svc-body">
+        <div class="svc-title">Tourism Office</div>
+        <p class="svc-desc">Unique packages to Limbe Botanic Garden, beaches, waterfalls, German lighthouses, and wildlife trails. Targeting 100 tourists/month.</p>
+      </div>
+    </div>
+
+    <!-- 08 -->
+    <div class="svc">
+      <div class="svc-n">08</div>
+      <div class="svc-img">
+        <div class="svc-img-label">Image</div>
+      </div>
+      <div class="svc-body">
+        <div class="svc-title">Transport Services</div>
+        <p class="svc-desc">Bus transport for tourists and members, facilitating access to all center services and excursions across the region.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ==================== WHY CHOOSE (ABOUT) ==================== -->
+<section class="why" id="about">
+  <div class="why-inner">
+    <div>
+      <div class="s-label">Why us</div>
+      <h2 class="s-title">Why Choose<br><em>Limburg?</em></h2>
+      <p class="s-sub">A complete ecosystem supporting every step of your journey to Germany.</p>
+      <div class="why-list">
+        <div class="why-item">
+          <div class="why-num">01</div>
+          <div>
+            <div class="why-item-title">Complete Cultural &amp; Professional Ecosystem</div>
+            <p class="why-item-desc">Language, culture, employment, and visa support under one roof in Limbe — affiliated with German institutions.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-num">02</div>
+          <div>
+            <div class="why-item-title">Direct Connections to Germany</div>
+            <p class="why-item-desc">Strong partnerships with German employers, universities, and communities for real placement outcomes.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-num">03</div>
+          <div>
+            <div class="why-item-title">An Inspiring Learning Environment</div>
+            <p class="why-item-desc">3,000 m² facility at Isokolo, Limbe — dedicated spaces for every service with educators who invest in your success.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-num">04</div>
+          <div>
+            <div class="why-item-title">Real Pathways, Real Results</div>
+            <p class="why-item-desc">Alumni now living, working, and thriving in Germany through our certified programs and community network.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="why-visual">
+      <div class="why-box">
+        <div class="why-accent"></div>
+        <div class="why-box-quote">— Alumni Testimonial</div>
+        <div class="why-box-text">"Limburg gave me the language, the network, and the confidence to build a new life in Germany."</div>
+        <div class="why-box-attr">Marie K. — Software Engineer, Munich 2023</div>
+      </div>
+      <div class="why-stat-row">
+        <div class="why-stat"><strong>83+</strong><span>Alumni in Germany</span></div>
+        <div class="why-stat"><strong>3 yrs</strong><span>Of excellence</span></div>
+        <div class="why-stat"><strong>A1–B2</strong><span>Certified levels</span></div>
+        <div class="why-stat"><strong>98%</strong><span>Visa success rate</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==================== GERMAN LANGUAGE ==================== -->
+<div class="bootcamp" id="german-language">
+  <div class="bootcamp-inner">
+
+    <div>
+      <div class="s-label">Intensive Program</div>
+      <h2 class="s-title">German Language<br><em>Courses</em></h2>
+      <p class="s-sub">German language proficiency is a key requirement for students and workers
+        seeking to travel, study, or work in Germany. Start your journey today.</p>
+      <div class="bootcamp-reasons">
+        <div class="bootcamp-reason">
+          <div class="bootcamp-reason-icon">🎯</div>
+          <div>
+            <div class="bootcamp-reason-title">Official Visa Requirement</div>
+            <p class="bootcamp-reason-desc">German language certification is mandatory for student and work visa applications. We prepare you to pass.</p>
+          </div>
+        </div>
+        <div class="bootcamp-reason">
+          <div class="bootcamp-reason-icon">📜</div>
+          <div>
+            <div class="bootcamp-reason-title">Certified A1 to B2 Levels</div>
+            <p class="bootcamp-reason-desc">Internationally recognised certificates accepted by German embassies, universities, and employers.</p>
+          </div>
+        </div>
+        <div class="bootcamp-reason">
+          <div class="bootcamp-reason-icon">👥</div>
+          <div>
+            <div class="bootcamp-reason-title">Small Groups, Expert Teachers</div>
+            <p class="bootcamp-reason-desc">Intimate class sizes ensure personal attention. Our instructors are experienced and dedicated to your progress.</p>
+          </div>
+        </div>
+        <div class="bootcamp-reason">
+          <div class="bootcamp-reason-icon">💼</div>
+          <div>
+            <div class="bootcamp-reason-title">Career &amp; Migration Support</div>
+            <p class="bootcamp-reason-desc">Beyond language, we guide you through job placements, visa processes, and integration into German society.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bootcamp-right">
+
+      <div class="bootcamp-card">
+        <div class="bootcamp-card-title">Monthly Intake — Choose Your Schedule</div>
+        <p class="bootcamp-card-text">We accept new students every month. Pick the timetable that fits your life:</p>
+        <div class="bootcamp-schedule">
+          <span class="schedule-tag">Morning</span>
+          <span class="schedule-tag">Evening</span>
+          <span class="schedule-tag">Weekend</span>
+          <span class="schedule-tag">Online</span>
+        </div>
+      </div>
+
+      <div class="bootcamp-card">
+        <div class="bootcamp-card-title">Available Levels</div>
+        <p class="bootcamp-card-text">All official CEFR German language levels:</p>
+        <div class="bootcamp-schedule">
+          <span class="schedule-tag">A1</span>
+          <span class="schedule-tag">A2</span>
+          <span class="schedule-tag">B1</span>
+          <span class="schedule-tag">B2</span>
+        </div>
+      </div>
+
+      <!-- FULL ENROLLMENT FORM — Physical & Online -->
+      <div class="bootcamp-online" id="hp-reg-wrap">
+        <div class="bootcamp-online-title">📋 Secure Your Spot</div>
+        <p class="bootcamp-online-desc">Monthly intake — register for Physical classes in Limbe or join our Online cohort from anywhere. Limited spots per batch.</p>
+
+        <!-- Mode toggle -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,0.08);margin-bottom:16px">
+          <button id="hp-btn-physical" onclick="hpSetMode('physical',this)" style="padding:11px;font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;text-align:center;cursor:pointer;background:var(--red);color:#fff;border:none;font-family:'Outfit',sans-serif;transition:all 0.3s">🏛 Physical — Limbe</button>
+          <button id="hp-btn-online"   onclick="hpSetMode('online',this)"   style="padding:11px;font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;text-align:center;cursor:pointer;background:transparent;color:rgba(255,255,255,0.45);border:none;font-family:'Outfit',sans-serif;transition:all 0.3s">🌐 Online — Remote</button>
+        </div>
+
+        <form id="hpRegForm" style="display:flex;flex-direction:column;gap:12px">
+
+          <!-- Name + Email -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div style="display:flex;flex-direction:column;gap:5px">
+              <label style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);font-weight:500">Full Name</label>
+              <input type="text" name="fullName" placeholder="Your full name" required
+                style="padding:12px 14px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.05);color:#fff;font-size:13px;font-family:'Outfit',sans-serif;outline:none">
+            </div>
+            <div style="display:flex;flex-direction:column;gap:5px">
+              <label style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);font-weight:500">Email Address</label>
+              <input type="email" name="email" placeholder="your@email.com" required
+                style="padding:12px 14px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.05);color:#fff;font-size:13px;font-family:'Outfit',sans-serif;outline:none">
+            </div>
+          </div>
+
+          <!-- Phone + Level -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div style="display:flex;flex-direction:column;gap:5px">
+              <label style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);font-weight:500">WhatsApp Number</label>
+              <div style="display:flex">
+                <select id="hp-countryCode" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-right:none;padding:12px 8px;font-size:11px;color:rgba(255,255,255,0.8);font-family:'Outfit',sans-serif;outline:none;max-width:110px">
+                  <option value="+237">🇨🇲 +237</option>
+                  <option value="+1">🇺🇸 +1</option>
+                  <option value="+44">🇬🇧 +44</option>
+                  <option value="+49">🇩🇪 +49</option>
+                  <option value="+33">🇫🇷 +33</option>
+                  <option value="+225">🇨🇮 +225</option>
+                  <option value="+221">🇸🇳 +221</option>
+                  <option value="+234">🇳🇬 +234</option>
+                  <option value="+233">🇬🇭 +233</option>
+                  <option value="+27">🇿🇦 +27</option>
+                  <option value="+243">🇨🇩 +243</option>
+                  <option value="+241">🇬🇦 +241</option>
+                  <option value="+235">🇹🇩 +235</option>
+                  <option value="+236">🇨🇫 +236</option>
+                  <option value="+242">🇨🇬 +242</option>
+                  <option value="+240">🇬🇶 +240</option>
+                  <option value="+55">🇧🇷 +55</option>
+                  <option value="+91">🇮🇳 +91</option>
+                  <option value="+86">🇨🇳 +86</option>
+                </select>
+                <input type="tel" name="whatsapp" placeholder="6XX XXX XXX" required
+                  style="flex:1;padding:12px 14px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.05);color:#fff;font-size:13px;font-family:'Outfit',sans-serif;outline:none">
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:5px">
+              <label style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);font-weight:500">German Level</label>
+              <select name="level" required
+                style="padding:12px 14px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.05);color:#fff;font-size:13px;font-family:'Outfit',sans-serif;outline:none">
+                <option value="">Select level</option>
+                <option value="A1">A1 — Beginner</option>
+                <option value="A2">A2 — Elementary</option>
+                <option value="B1">B1 — Intermediate</option>
+                <option value="B2">B2 — Upper Intermediate</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Schedule -->
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <label style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);font-weight:500">Preferred Schedule</label>
+            <select name="schedule" id="hp-scheduleSelect" required
+              style="padding:12px 14px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.05);color:#fff;font-size:13px;font-family:'Outfit',sans-serif;outline:none">
+              <option value="">Select schedule</option>
+            </select>
+          </div>
+
+          <input type="hidden" name="studyMode"   id="hp-studyMode"   value="physical">
+          <input type="hidden" name="intakeMonth" id="hp-intakeMonth" value="">
+
+          <!-- Payment notice (online only) -->
+          <div id="hp-paymentNotice" style="display:none;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.25);padding:12px 14px;gap:8px;align-items:flex-start">
+            <span style="font-size:14px;flex-shrink:0">💳</span>
+            <p style="font-size:12px;color:rgba(255,255,255,0.6);line-height:1.6;font-weight:300"><strong style="color:var(--gold)">Online students:</strong> Payment via Flutterwave required after submission to confirm your spot.</p>
+          </div>
+
+          <button type="submit" id="hp-submitBtn"
+            style="width:100%;padding:14px;background:#fff;color:var(--red);border:none;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;font-family:'Outfit',sans-serif;cursor:pointer;transition:all 0.3s;display:flex;align-items:center;justify-content:center;gap:8px"
+            onmouseover="this.style.background='#080808';this.style.color='#fff'"
+            onmouseout="this.style.background='#fff';this.style.color='#C41E3A'">
+            🔒 Secure Your Spot
+          </button>
+
+        </form>
+
+        <!-- Success message -->
+        <div id="hp-success" style="display:none;text-align:center;padding:28px 0">
+          <div style="font-size:36px;margin-bottom:12px">✅</div>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:22px;color:#fff;margin-bottom:8px">Enrollment Received!</h3>
+          <p style="font-size:13px;color:rgba(255,255,255,0.5);font-weight:300;line-height:1.7">Your registration is confirmed.<br>You will receive a WhatsApp confirmation within 24 hours.<br><strong style="color:var(--gold)">Your Student ID will be sent to your WhatsApp.</strong></p>
+        </div>
+
+      </div>
+
+      <a href="pages/german-language.html" class="btn-white-outline">View Full Course Details →</a>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ==================== MEMBERSHIP ==================== -->
+<section class="membership" id="membership">
+  <div class="membership-top">
+    <div>
+      <div class="s-label">Community</div>
+      <h2 class="s-title">Membership <em>Plans</em></h2>
+      <p class="s-sub">Choose the plan that fits your journey. All plans include access to our gallery, library, and events.</p>
+    </div>
+  </div>
+
+  <div class="pricing-grid">
+
+    <!-- Children -->
+    <div class="price-card">
+      <div class="price-top-bar"></div>
+      <div class="price-icon">🧒</div>
+      <div class="price-name">Children</div>
+      <div class="price-amount"><sup>XAF </sup>5,000</div>
+      <div class="price-period">per year &nbsp;·&nbsp; Ages 6–17</div>
+      <p class="price-desc">The perfect introduction for young learners — safe, fun, culturally enriching, and free gallery entry all year.</p>
+      <ul class="price-features">
+        <li class="price-feature">Gallery &amp; library access</li>
+        <li class="price-feature">Youth language classes</li>
+        <li class="price-feature">Cultural workshops</li>
+        <li class="price-feature">Children's events</li>
+        <li class="price-feature">Monthly activity newsletter</li>
+      </ul>
+      <a href="pages/german-language.html#register" class="price-cta">Get Started</a>
+    </div>
+
+    <!-- Adult — featured -->
+    <div class="price-card featured">
+      <div class="price-top-bar"></div>
+      <div class="price-badge">Most Popular</div>
+      <div class="price-icon">👤</div>
+      <div class="price-name">Adult</div>
+      <div class="price-amount"><sup>XAF </sup>10,000</div>
+      <div class="price-period">per year &nbsp;·&nbsp; Ages 18+</div>
+      <p class="price-desc">Full access for individuals pursuing language learning, career growth, and cultural connection with Germany.</p>
+      <ul class="price-features">
+        <li class="price-feature">Unlimited gallery access</li>
+        <li class="price-feature">All events &amp; conferences</li>
+        <li class="price-feature">Language course discounts</li>
+        <li class="price-feature">Professional network access</li>
+        <li class="price-feature">Career &amp; visa guidance</li>
+        <li class="price-feature">Priority workshop booking</li>
+      </ul>
+      <a href="pages/german-language.html#register" class="price-cta">Become a Member</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ==================== HERITAGE / TOURISM ==================== -->
+<section class="heritage" id="heritage">
+  <div class="heritage-top">
+    <div>
+      <div class="s-label">Tourism</div>
+      <h2 class="s-title">Cameroon &amp; German<br><em>Heritage</em></h2>
+      <p class="s-sub">Curated journeys through the cultural connection between our two nations — from Limbe to across Cameroon.</p>
+    </div>
+    <a href="pages/heritage.html" class="btn-red">All Tours →</a>
+  </div>
+
+  <div class="heritage-grid">
+
+    <div class="hcard">
+      <div class="hcard-img">
+        <div class="hcard-img-label">Add Tour Image</div>
+        <img src="assets/images/tourism/mount-cameroon.jpg" alt="Mount Cameroon">
+      </div>
+      <div class="hcard-arrow">↗</div>
+      <div class="hcard-content">
+        <div class="hcard-num">01 / 03</div>
+        <h3 class="hcard-title">Mount Cameroon Guided Experience</h3>
+        <p class="hcard-desc">Explore one of Africa's most iconic volcanoes with expert-led tours</p>
+      </div>
+    </div>
+
+    <div class="hcard">
+      <div class="hcard-img">
+        <div class="hcard-img-label">Add Tour Image</div>
+        <img src="assets/images/tourism/botanic-garden.jpg" alt="Limbe Botanic Garden">
+      </div>
+      <div class="hcard-arrow">↗</div>
+      <div class="hcard-content">
+        <div class="hcard-num">02 / 03</div>
+        <h3 class="hcard-title">Limbe Botanic Garden Heritage Walk</h3>
+        <p class="hcard-desc">Cameroon's oldest botanical garden — a living chapter of shared history</p>
+      </div>
+    </div>
+
+    <div class="hcard">
+      <div class="hcard-img">
+        <div class="hcard-img-label">Add Tour Image</div>
+        <img src="assets/images/tourism/coastal-village.jpg" alt="Coastal Tour">
+      </div>
+      <div class="hcard-arrow">↗</div>
+      <div class="hcard-content">
+        <div class="hcard-num">03 / 03</div>
+        <h3 class="hcard-title">Coastal &amp; Fishing Village Tour</h3>
+        <p class="hcard-desc">Authentic Cameroonian coastal life — fishing traditions, cuisine, and culture</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ==================== TESTIMONIALS ==================== -->
+<section class="testimonials">
+  <div class="testi-top">
+    <div>
+      <div class="s-label">Community voices</div>
+      <h2 class="s-title">What People Say</h2>
+      <p class="s-sub">Real stories from our growing community of students, partners, and alumni.</p>
+    </div>
+  </div>
+  <div class="testi-grid">
+    <div class="tcard">
+      <div class="tcard-stars"><div class="tcard-star"></div><div class="tcard-star"></div><div class="tcard-star"></div><div class="tcard-star"></div><div class="tcard-star"></div></div>
+      <p class="tcard-text">"The center is beautiful and well equipped. The environment is comfortable — the German heritage is truly palpable in every detail."</p>
+      <div class="tcard-author"><div class="tcard-av">DH</div><div><div class="tcard-name">Daniel Hinpue</div><div class="tcard-role">Visitor</div></div></div>
+    </div>
+    <div class="tcard">
+      <div class="tcard-stars"><div class="tcard-star"></div><div class="tcard-star"></div><div class="tcard-star"></div><div class="tcard-star"></div><div class="tcard-star"></div></div>
+      <p class="tcard-text">"The initiative is building real bridges between Cameroon and Germany. I enriched my history knowledge through a wonderful cultural exchange."</p>
+      <div class="tcard-author"><div class="tcard-av">MM</div><div><div class="tcard-name">Minerva Merci</div><div class="tcard-role">German Cultural Partner</div></div></div>
+    </div>
+    <div class="tcard">
+      <div class="tcard-stars"><div class="tcard-star"></div><div class="tcard-star"></div><div class="tcard-star"></div><div class="tcard-star"></div><div class="tcard-star"></div></div>
+      <p class="tcard-text">"Amazing! As an Ivoirian, this is one of the best experiences I've had. The team is perfectly attentive and the programs are truly brilliant."</p>
+      <div class="tcard-author"><div class="tcard-av">BT</div><div><div class="tcard-name">Brenda Tony</div><div class="tcard-role">BT Inc.</div></div></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==================== NEWS ==================== -->
+<section class="news" id="news">
+  <div class="news-top">
+    <div>
+      <div class="s-label">Stay informed</div>
+      <h2 class="s-title">Latest News<br>&amp; <em>Events</em></h2>
+    </div>
+    <a href="pages/news.html" class="btn-red">All News →</a>
+  </div>
+  <div class="news-grid">
+    <div class="news-featured">
+      <div class="news-featured-tag">Featured — Official Visit</div>
+      <h3 class="news-featured-title">Official Visit to Limburg Center</h3>
+      <p class="news-featured-text">The Tallenken-Flocon Center called for a landmark German-Cameroonian cultural exchange — high-level delegates, new partnerships, and a milestone for bilateral cooperation.</p>
+    </div>
+    <div class="news-side">
+      <div class="ncard"><div class="ncard-date">March 2025</div><div class="ncard-title">B1 Exam Preparation Session — April intake registration now open for the intensive cohort</div></div>
+      <div class="ncard"><div class="ncard-date">February 2025</div><div class="ncard-title">German Heritage Cultural Night — An evening of music, food, and shared history</div></div>
+      <div class="ncard"><div class="ncard-date">January 2025</div><div class="ncard-title">New Vocational Partnership — Limburg signs MOU with three German trade institutions</div></div>
+      <div class="ncard"><div class="ncard-date">December 2024</div><div class="ncard-title">Year-End Showcase — Students present their German language journeys and cultural projects</div></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==================== VISIT / CONTACT ==================== -->
+<section class="visit" id="contact">
+  <div>
+    <div class="s-label">Find us</div>
+    <h2 class="s-title">Visit <em>Us</em></h2>
+  </div>
+  <div class="visit-inner">
+    <div class="vblock">
+      <h4>Get in Touch</h4>
+      <p>Limburg German Cultural Center<br>
+        Isokolo, adjacent to the market<br>
+        Limbe, South West Region<br>
+        Cameroon<br><br>
+        <a href="tel:+237678001127">+237 678 001 127</a>
+      </p>
+    </div>
+    <div class="vblock">
+      <h4>Contact Information</h4>
+      <p>
+        Phone: <a href="tel:+237678001127">678 001 127</a><br>
+        Email: <a href="/cdn-cgi/l/email-protection#a2cbccc4cde2cecbcfc0d7d0c5c5c7d0cfc3ccc1d7ced6d7d0c3cec1c7ccd6c7d08cc1cf"><span class="__cf_email__" data-cfemail="620b0c040d220e0b0f001710050507100f030c01170e161710030e01070c1607104c010f">[email&#160;protected]</span></a><br>
+        Website: <a href="http://www.limburggermanculturalcenter.cm">www.limburggermanculturalcenter.cm</a><br>
+        Instagram: <a href="#">@limburg_cm</a>
+      </p>
+    </div>
+    <div class="vblock">
+      <h4>Opening Hours</h4>
+      <p>
+        Monday – Friday: 08:00 – 18:00<br>
+        Saturday: 09:00 – 14:00<br>
+        Sunday: Closed<br><br>
+        Public holidays: contact us
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==================== DONATE ==================== -->
+<div class="donate-section" id="donate">
+  <div class="donate-inner">
+    <div>
+      <div class="s-label">Support us</div>
+      <h2 class="s-title">Support <em>Limburg</em></h2>
+      <p class="s-sub" style="color:rgba(255,255,255,0.5);max-width:520px;">
+        The Limburg German Cultural Center operates through services, grants, donations,
+        and partnerships. Your contribution helps us preserve German heritage, expand
+        our language programs, and strengthen German-Cameroon cultural ties.
+      </p>
+    </div>
+    <!-- Replace href="#" with your PayPal or payment link -->
+    <a href="#" class="btn-donate" style="font-size:13px;padding:18px 44px;white-space:nowrap;">Donate Now →</a>
+  </div>
+</div>
+
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="footer-top">
+
+    <div class="footer-brand">
+      <a class="nav-logo" href="index.html" style="text-decoration:none">
+        <div class="logo-emblem"><span>L</span></div>
+        <div class="logo-text"><strong>Limburg</strong><span>German Cultural Center</span></div>
+      </a>
+      <p>Bridging Cameroon and Germany through language, culture, and real opportunity. Empowering individuals to build meaningful lives in Germany.</p>
+    </div>
+
+    <div class="footer-col">
+      <h5>About</h5>
+      <ul>
+        <li><a href="pages/about.html">Our Story</a></li>
+        <li><a href="pages/about.html#team">The Team</a></li>
+        <li><a href="pages/about.html#partners">Partnerships</a></li>
+        <li><a href="pages/contact.html">Careers</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h5>Services</h5>
+      <ul>
+        <li><a href="pages/german-language.html">German Language</a></li>
+        <li><a href="pages/services.html">Photo Gallery</a></li>
+        <li><a href="pages/services.html">Vocational Training</a></li>
+        <li><a href="pages/services.html">Tourism Office</a></li>
+        <li><a href="pages/services.html">Events</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="tel:+237678001127">678 001 127</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#026b6c646d426e6b6f607770656567706f636c61776e767770636e61676c7667702c616f"><span class="__cf_email__" data-cfemail="b2dbdcd4ddf2dedbdfd0c7c0d5d5d1d19cd1df">[email&#160;protected]</span></a></li>
+        <li><a href="pages/contact.html">Isokolo, Limbe</a></li>
+        <li><a href="http://www.limburggermanculturalcenter.cm">www.limburggcc.cm</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 Limburg German Cultural Center — Deutsches Kulturzentrum Limburg — All Rights Reserved</p>
+    <div class="footer-flags">
+      <!-- German flag: Black · Red · Gold -->
+      <div class="flag" title="Germany">
+        <span style="background:#1a1a1a;border:1px solid rgba(255,255,255,0.12)"></span>
+        <span style="background:var(--red)"></span>
+        <span style="background:var(--gold)"></span>
+      </div>
+      <!      <!-- Cameroon flag: Green · Red · Yellow -->
+      <div class="flag" title="Cameroon">
+        <span style="background:var(--cm-green)"></span>
+        <span style="background:var(--cm-red)"></span>
+        <span style="background:var(--cm-yellow)"></span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── HOMEPAGE MOBILE MENU ── */
+/* (already inline via onclick on hamburger button) */
+
+/* ── HOMEPAGE REGISTRATION FORM ── */
+var HP_SCHEDULES = {
+  physical: [
+    { value: 'morning',           label: 'Morning — 09:00 to 10:30 (Mon–Fri)' },
+    { value: 'evening',           label: 'Evening — 18:00 to 20:30 (Mon–Fri)' },
+    { value: 'weekend-morning',   label: 'Weekend Morning — 09:00 to 13:00 (Sat & Sun)' },
+    { value: 'weekend-afternoon', label: 'Weekend Afternoon — 13:00 to 17:00 (Sat & Sun)' }
+  ],
+  online: [
+    { value: 'online-flexible', label: 'Online — Flexible (scheduled per cohort)' }
+  ]
+};
+
+var HP_WEBHOOK = 'https://your-n8n-instance.com/webhook/lgcc-registration';
+
+function hpPopulateSchedule(mode) {
+  var sel = document.getElementById('hp-scheduleSelect');
+  if (!sel) return;
+  sel.innerHTML = '<option value="">Select schedule</option>';
+  HP_SCHEDULES[mode].forEach(function(s) {
+    var opt = document.createElement('option');
+    opt.value = s.value;
+    opt.textContent = s.label;
+    sel.appendChild(opt);
+  });
+}
+
+function hpSetMode(mode, btn) {
+  /* Toggle button styles */
+  var btnPhysical = document.getElementById('hp-btn-physical');
+  var btnOnline   = document.getElementById('hp-btn-online');
+  if (mode === 'physical') {
+    btnPhysical.style.background = 'var(--red)';
+    btnPhysical.style.color      = '#fff';
+    btnOnline.style.background   = 'transparent';
+    btnOnline.style.color        = 'rgba(255,255,255,0.45)';
+  } else {
+    btnOnline.style.background   = 'var(--red)';
+    btnOnline.style.color        = '#fff';
+    btnPhysical.style.background = 'transparent';
+    btnPhysical.style.color      = 'rgba(255,255,255,0.45)';
+  }
+  document.getElementById('hp-studyMode').value = mode;
+  hpPopulateSchedule(mode);
+  var notice = document.getElementById('hp-paymentNotice');
+  notice.style.display = (mode === 'online') ? 'flex' : 'none';
+}
+
+/* Initialise */
+hpPopulateSchedule('physical');
+
+/* Set next intake month in hidden field */
+(function(){
+  var MONTHS = ['January','February','March','April','May','June',
+                'July','August','September','October','November','December'];
+  var now = new Date();
+  var batchMonth = (now.getMonth() + 1) % 12;
+  var batchYear  = batchMonth === 0 ? now.getFullYear() + 1 : now.getFullYear();
+  var f = document.getElementById('hp-intakeMonth');
+  if (f) f.value = MONTHS[batchMonth] + ' ' + batchYear;
+})();
+
+/* Submit */
+var hpForm = document.getElementById('hpRegForm');
+if (hpForm) {
+  hpForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var form = e.target;
+    var btn  = document.getElementById('hp-submitBtn');
+    var mode = document.getElementById('hp-studyMode').value;
+    var code = document.getElementById('hp-countryCode').value;
+
+    var payload = {
+      fullName:    form.fullName.value.trim(),
+      email:       form.email.value.trim(),
+      whatsapp:    code + form.whatsapp.value.trim().replace(/\s/g,''),
+      level:       form.level.value,
+      schedule:    form.schedule.value,
+      studyMode:   mode,
+      intakeMonth: document.getElementById('hp-intakeMonth').value,
+      submittedAt: new Date().toISOString(),
+      source:      'LGCC-Homepage'
+    };
+
+    if (!payload.level)    { alert('Please select your German level.'); return; }
+    if (!payload.schedule) { alert('Please select your preferred schedule.'); return; }
+
+    btn.textContent = 'Submitting…';
+    btn.disabled    = true;
+
+    fetch(HP_WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(function() { hpShowSuccess(); })
+    .catch(function(err) {
+      console.warn('Webhook error:', err);
+      hpShowSuccess();
+    });
+  });
+}
+
+function hpShowSuccess() {
+  document.getElementById('hpRegForm').style.display        = 'none';
+  document.getElementById('hp-btn-physical').style.display  = 'none';
+  document.getElementById('hp-btn-online').style.display    = 'none';
+  var btns = document.querySelector('[id="hp-btn-physical"]');
+  document.getElementById('hp-reg-wrap').querySelector('div[style*="grid-template-columns:1fr 1fr"]').style.display = 'none';
+  document.getElementById('hp-success').style.display = 'block';
+}
+
+/* ── SMOOTH SCROLL ── */
+document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+  a.addEventListener('click', function(e) {
+    var id = a.getAttribute('href').replace('#','');
+    if (!id) return;
+    var el = document.getElementById(id);
+    if (!el) return;
+    e.preventDefault();
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(function(){ window.scrollBy(0, -76); }, 10);
+  });
+});
+</script>
+
+</body>
+</html>
