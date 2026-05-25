@@ -1,0 +1,2 @@
+Place your services files here.
+See IMAGE_REFERENCE.txt and README.txt for instructions.

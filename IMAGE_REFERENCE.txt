@@ -1,0 +1,295 @@
+================================================================
+  LIMBURG GERMAN CULTURAL CENTER — IMAGE REFERENCE FILE
+  ================================================================
+  This file lists every image slot in the website.
+  For each slot:
+    1. Save your photo with the exact filename shown
+    2. Place it in the folder shown
+    3. Follow the in-code comment to swap the placeholder
+
+  SUPPORTED FORMATS: .jpg  .jpeg  .png  .webp
+  RECOMMENDED TOOL: Use https://squoosh.app to compress images
+                    before uploading (keeps load time fast).
+================================================================
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📁  assets/images/hero/
+  Used on: ALL page hero banners (the dark top section)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  building.jpg
+    → The exterior or interior of the Limburg Cultural Center
+    → Used as hero background on ALL pages
+    → Recommended size: 1920 × 1080 px or larger
+    → The dark overlay keeps text white — any photo works
+    → HOW TO ACTIVATE: In each page's <style> block, find:
+        /* background-image: url('../assets/images/hero/building.jpg'); */
+      and remove the /* */ comment markers
+
+  heritage-hero.jpg  (optional — used only on heritage.html if different)
+    → A scenic Cameroon landscape, mountain, or colonial site
+    → Recommended size: 1920 × 1080 px
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📁  assets/images/services/
+  Used on: pages/services.html
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  gallery.jpg
+    → Interior of the Photo Gallery Hall, exhibition display
+    → Recommended size: 800 × 600 px
+
+  language-class.jpg
+    → Students in a German language class, classroom view
+    → Recommended size: 800 × 600 px
+
+  library.jpg
+    → Library interior, bookshelves, reading area
+    → Recommended size: 800 × 600 px
+
+  events.jpg
+    → Panel discussion, conference, or event at the center
+    → Recommended size: 800 × 600 px
+
+  vocational.jpg
+    → Students in vocational training (fashion, IT, cooking, etc.)
+    → Recommended size: 800 × 600 px
+
+  cafe.jpg
+    → Haus der Freundschaft café-restaurant terrace or interior
+    → Recommended size: 800 × 600 px
+
+  tourism.jpg
+    → Tour group, scenic Cameroon landscape, or Mount Cameroon
+    → Recommended size: 800 × 600 px
+
+  transport.jpg
+    → The center's bus, vehicle, or transport in action
+    → Recommended size: 800 × 600 px
+
+  HOW TO ADD EACH IMAGE:
+  In services.html, find the comment for the service you want,
+  for example for the gallery:
+    <!-- FILE: assets/images/services/gallery.jpg -->
+  Replace the <div class="img-slot"> block with:
+    <img src="../assets/images/services/gallery.jpg" alt="Photo Gallery">
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📁  assets/images/about/
+  Used on: pages/about.html
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  founder.jpg
+    → Founder photo, center director, or center interior
+    → Recommended size: 600 × 750 px (portrait orientation)
+
+  partner-1.png  (transparent background preferred)
+    → Logo of Partner / Collaborator 1
+    → Recommended size: 200 × 80 px (PNG with transparency)
+
+  partner-2.png
+    → Logo of Partner / Collaborator 2
+
+  partner-3.png
+    → Logo of Partner / Collaborator 3
+
+  HOW TO ADD: In about.html find the comment for each slot, e.g.:
+    <!-- FILE: assets/images/about/founder.jpg -->
+  Replace the <div class="story-img"> with:
+    <img src="../assets/images/about/founder.jpg" alt="Founder">
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📁  assets/images/team/
+  Used on: pages/about.html — Team section
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  team-1.jpg   → Team member 1 (Executive Director)
+  team-2.jpg   → Team member 2 (Head of Language School)
+  team-3.jpg   → Team member 3 (Cultural Programs Manager)
+  team-4.jpg   → Team member 4 (Tourism & Heritage Officer)
+
+    → Recommended size: 400 × 530 px (portrait, 3:4 ratio)
+    → Use consistent framing across all team photos
+
+  HOW TO ADD: In about.html find:
+    <!-- FILE: assets/images/team/team-1.jpg -->
+  Replace the <div class="team-photo"> contents with:
+    <img src="../assets/images/team/team-1.jpg" alt="[Name], [Role]">
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📁  assets/images/tourism/
+  Used on: pages/heritage.html
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  mount-cameroon.jpg
+    → Mount Cameroon volcano, trekking, or landscape
+    → Recommended size: 800 × 530 px
+
+  botanic-garden.jpg
+    → Limbe Botanic Garden paths, plants, or colonial buildings
+    → Recommended size: 800 × 530 px
+
+  coastal-village.jpg
+    → Coastal fishing community, beach, or village scene
+    → Recommended size: 800 × 530 px
+
+  german-lighthouse.jpg
+    → German-built lighthouse or colonial architecture
+    → Recommended size: 800 × 530 px
+
+  mangrove-trail.jpg
+    → Mangrove forest, trail, or kayaking/boat scene
+    → Recommended size: 800 × 530 px
+
+  wildlife-centre.jpg
+    → Limbe Wildlife Centre — primates, reptiles, or park view
+    → Recommended size: 800 × 530 px
+
+  waterfalls.jpg
+    → Cameroon waterfalls or crater lake landscape
+    → Recommended size: 800 × 530 px
+
+  heritage-main.jpg
+    → Large heritage image — German colonial building or map
+    → Recommended size: 900 × 600 px
+
+  heritage-sm-1.jpg  → Small supporting heritage image 1 (square)
+  heritage-sm-2.jpg  → Small supporting heritage image 2 (square)
+
+  HOW TO ADD: In heritage.html find the comment for each tour, e.g.:
+    <!-- FILE: assets/images/tourism/mount-cameroon.jpg -->
+  Replace the <div class="tour-img"> contents with:
+    <img src="../assets/images/tourism/mount-cameroon.jpg" alt="Mount Cameroon">
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📁  assets/images/news/
+  Used on: pages/news.html
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  featured.jpg
+    → Hero/featured article background image
+    → Recommended size: 1200 × 480 px (wide, landscape)
+    → HOW TO ADD: In news.html find .featured-article and add:
+        style="background-image:url('../assets/images/news/featured.jpg');
+               background-size:cover;background-position:center;"
+
+  article-1.jpg  → B1 Exam Preparation article thumbnail
+  article-2.jpg  → New Gallery Exhibit article thumbnail
+  article-3.jpg  → Panel Discussion recap thumbnail
+  article-4.jpg  → German tourists article thumbnail
+  article-5.jpg  → MOU signing article thumbnail
+  article-6.jpg  → Café opening article thumbnail
+
+    → Recommended size: 800 × 450 px (16:9 ratio)
+    → HOW TO ADD: In news.html find the comment for each article, e.g.:
+        <!-- FILE: assets/images/news/article-1.jpg -->
+      Replace the <div class="ac-img"> contents with:
+        <img src="../assets/images/news/article-1.jpg" alt="Article title">
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📁  assets/images/gallery/
+  Used for: future photo gallery page expansion
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  This folder is reserved for the Photo Gallery exhibition images.
+  Name them: exhibit-01.jpg, exhibit-02.jpg, exhibit-03.jpg …
+  Recommended size: 1200 × 900 px each
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📁  assets/images/
+  Root-level assets used site-wide
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  favicon.ico  (or favicon.png)
+    → The small icon shown in the browser tab
+    → Recommended size: 32 × 32 px (ICO) or 512 × 512 px (PNG)
+    → HOW TO ADD: In each HTML <head> add:
+        <link rel="icon" href="../assets/images/favicon.ico">
+        (use href="assets/images/favicon.ico" in index.html)
+
+  logo.png  (optional — for use as custom logo in nav)
+    → Full logo with text, white version for dark backgrounds
+    → Recommended size: 200 × 60 px (transparent PNG)
+    → HOW TO ACTIVATE: In each HTML file, replace the
+      .logo-emblem block in the nav with:
+        <img src="../assets/images/logo.png" alt="Limburg Center" style="height:40px;width:auto">
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📁  assets/videos/
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  intro.mp4  (optional — for a hero background video)
+    → Short looping video of the center, 10–30 seconds
+    → Recommended size: 1920 × 1080 px, H.264 codec, < 10 MB
+    → HOW TO USE: Replace the hero background image with:
+        <video autoplay muted loop playsinline
+               style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0">
+          <source src="../assets/videos/intro.mp4" type="video/mp4">
+        </video>
+
+  gallery-documentary.mp4  (for library/documentary screenings)
+    → Documentary or cultural video shown in library section
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  COMPLETE SUMMARY — ALL IMAGE FILES TO CREATE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  assets/images/hero/
+    building.jpg          ← MOST IMPORTANT — used on every page
+    heritage-hero.jpg     ← Optional alternate for heritage page
+
+  assets/images/services/
+    gallery.jpg           ← Photo Gallery section
+    language-class.jpg    ← German Language section
+    library.jpg           ← Library section
+    events.jpg            ← Events section
+    vocational.jpg        ← Vocational Training section
+    cafe.jpg              ← Café section
+    tourism.jpg           ← Tourism section
+    transport.jpg         ← Transport section
+
+  assets/images/about/
+    founder.jpg           ← Story/founder portrait
+    partner-1.png         ← Partner logo 1 (transparent PNG)
+    partner-2.png         ← Partner logo 2
+    partner-3.png         ← Partner logo 3
+
+  assets/images/team/
+    team-1.jpg            ← Executive Director
+    team-2.jpg            ← Head of Language School
+    team-3.jpg            ← Cultural Programs Manager
+    team-4.jpg            ← Tourism & Heritage Officer
+
+  assets/images/tourism/
+    mount-cameroon.jpg
+    botanic-garden.jpg
+    coastal-village.jpg
+    german-lighthouse.jpg
+    mangrove-trail.jpg
+    wildlife-centre.jpg
+    waterfalls.jpg
+    heritage-main.jpg
+    heritage-sm-1.jpg
+    heritage-sm-2.jpg
+
+  assets/images/news/
+    featured.jpg
+    article-1.jpg through article-6.jpg
+
+  assets/images/
+    favicon.ico
+    logo.png (optional)
+
+  TOTAL: ~30 images to replace placeholder divs
+
+================================================================

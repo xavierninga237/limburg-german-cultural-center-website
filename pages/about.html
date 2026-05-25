@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Limburg German Cultural Center</title>
+<!-- Google Fonts: Cormorant Garamond (headings) + Outfit (body) -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!-- Shared styles (nav, footer, buttons, variables) -->
+<link rel="stylesheet" href="../assets/css/shared.css">
+
+<style>
+/* =============================================================
+   ABOUT PAGE — page-specific styles
+   The shared.css handles nav, footer, buttons, and variables.
+   This block only contains styles unique to this page.
+   ============================================================= */
+
+/* ── HERO BACKGROUND IMAGE ──────────────────────────────────────
+   Step 1: Save your building photo as:
+           assets/images/hero/building.jpg
+   Step 2: Uncomment the background-image line below.
+   The ::before overlay in shared.css keeps text white and readable.
+   ────────────────────────────────────────────────────────────── */
+.page-hero {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  /* background-image: url('../assets/images/hero/building.jpg'); */
+  /* ↑ UNCOMMENT THIS LINE after placing your building image */
+}
+
+/* ── STORY SECTION ── */
+.story-section { background: var(--white); }
+.story-grid    { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+
+/* Left column: large pull-quote / founder image slot */
+.story-image-wrap { position: relative; }
+.story-img {
+  /*
+    IMAGE SLOT — Story / Founder photo
+    Place your image at: assets/images/about/founder.jpg
+    Replace the placeholder div below with:
+    <img src="../assets/images/about/founder.jpg" alt="Founder of Limburg Center">
+  */
+  width: 100%; aspect-ratio: 4/5;
+  background: var(--off);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; color: rgba(0,0,0,0.25); letter-spacing: 0.1em;
+  text-transform: uppercase; font-family: 'Outfit', sans-serif;
+}
+.story-accent {
+  position: absolute; bottom: -24px; right: -24px;
+  width: 160px; height: 160px;
+  background: var(--red); opacity: 0.06;
+}
+.story-quote {
+  position: absolute; bottom: 32px; left: -32px;
+  background: var(--black); padding: 28px 32px; max-width: 280px;
+}
+.story-quote p {
+  font-family: 'Cormorant Garamond', serif; font-size: 16px;
+  font-style: italic; color: rgba(255,255,255,0.7); line-height: 1.6; margin-bottom: 12px;
+}
+.story-quote span { font-size: 10px; color: var(--red); letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* Right column body text */
+.story-text p {
+  font-size: 15px; color: var(--gray); line-height: 1.9; font-weight: 300; margin-bottom: 24px;
+}
+.story-text p:last-child { margin-bottom: 0; }
+.story-text strong { color: var(--black); font-weight: 600; }
+
+/* Inline stat pills */
+.story-stats {
+  display: flex; gap: 32px; flex-wrap: wrap;
+  margin: 40px 0; padding: 32px 0;
+  border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light);
+}
+.story-stat strong {
+  display: block; font-family: 'Cormorant Garamond', serif;
+  font-size: 40px; font-weight: 600; color: var(--black); line-height: 1;
+}
+.story-stat span { font-size: 11px; color: var(--gray); letter-spacing: 0.08em; text-transform: uppercase; }
+
+/* ── MISSION / VALUES ── */
+.mission-section { background: var(--black2); overflow: hidden; position: relative; }
+.mission-section::before {
+  content: 'MISSION';
+  position: absolute; right: -40px; top: 50%; transform: translateY(-50%);
+  font-family: 'Cormorant Garamond', serif; font-size: 160px; font-weight: 700;
+  color: rgba(255,255,255,0.02); white-space: nowrap; pointer-events: none;
+}
+.mission-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; position: relative; z-index: 1; }
+.mission-section .s-title { color: var(--white); }
+.mission-section .s-sub   { color: rgba(255,255,255,0.4); }
+.mission-text p { font-size: 15px; color: rgba(255,255,255,0.5); line-height: 1.9; font-weight: 300; margin-bottom: 20px; }
+
+/* Values cards */
+.values-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(255,255,255,0.05); margin-top: 32px; }
+.value-card  { background: var(--black3); padding: 28px 24px; }
+.value-icon  { font-size: 24px; margin-bottom: 14px; }
+.value-title { font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 8px; }
+.value-desc  { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.6; font-weight: 300; }
+
+/* ── HISTORY TIMELINE ── */
+.history-section { background: var(--off); }
+.timeline        { margin-top: 64px; position: relative; }
+.timeline::before {
+  content: ''; position: absolute; left: 80px; top: 0; bottom: 0;
+  width: 1px; background: var(--border-light);
+}
+.tl-item        { display: grid; grid-template-columns: 80px 40px 1fr; gap: 0 24px; margin-bottom: 40px; align-items: start; }
+.tl-year        { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: var(--red); padding-top: 4px; text-align: right; }
+.tl-dot         { width: 10px; height: 10px; border-radius: 50%; background: var(--red); margin-top: 8px; position: relative; z-index: 1; justify-self: center; }
+.tl-content-title { font-size: 14px; font-weight: 600; color: var(--black); margin-bottom: 6px; }
+.tl-content-desc  { font-size: 13px; color: var(--gray); line-height: 1.65; font-weight: 300; }
+
+/* ── TEAM SECTION ── */
+.team-section { background: var(--white); }
+.team-grid    { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 64px; }
+.team-card    { position: relative; }
+.team-photo   {
+  /*
+    TEAM MEMBER PHOTO SLOT
+    Place photos at: assets/images/team/
+    File names: team-1.jpg, team-2.jpg, team-3.jpg, team-4.jpg
+    Replace each placeholder div with:
+    <img src="../assets/images/team/team-1.jpg" alt="[Name], [Role]">
+  */
+  width: 100%; aspect-ratio: 3/4;
+  background: var(--off); margin-bottom: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; color: rgba(0,0,0,0.2); letter-spacing: 0.1em;
+  text-transform: uppercase; font-family: 'Outfit', sans-serif; position: relative; overflow: hidden;
+}
+.team-photo::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 3px; background: var(--red); transform: scaleX(0);
+  transform-origin: left; transition: transform 0.4s;
+}
+.team-card:hover .team-photo::after { transform: scaleX(1); }
+.team-name { font-size: 15px; font-weight: 600; color: var(--black); margin-bottom: 4px; }
+.team-role { font-size: 12px; color: var(--gray); letter-spacing: 0.04em; font-weight: 300; margin-bottom: 8px; }
+.team-bio  { font-size: 12px; color: var(--gray); line-height: 1.6; font-weight: 300; }
+
+/* ── PARTNERS ── */
+.partners-section { background: var(--black); }
+.partners-section .s-title { color: var(--white); }
+.partners-section .s-sub   { color: rgba(255,255,255,0.4); }
+.partners-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.06); margin-top: 56px; }
+.partner-card  { background: var(--black); padding: 40px 32px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; transition: background 0.3s; }
+.partner-card:hover { background: var(--black3); }
+.partner-logo  {
+  /*
+    PARTNER LOGO SLOT
+    Place logos at: assets/images/about/
+    File names: partner-1.png, partner-2.png … (use transparent PNGs)
+    Replace each placeholder with:
+    <img src="../assets/images/about/partner-1.png" alt="Partner Name" style="height:40px;width:auto;filter:brightness(0) invert(1);opacity:0.6">
+  */
+  height: 40px; background: rgba(255,255,255,0.06);
+  display: flex; align-items: center; padding: 0 16px; min-width: 100px;
+  font-size: 10px; color: rgba(255,255,255,0.2); text-transform: uppercase; letter-spacing: 0.1em;
+}
+.partner-name { font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.6); }
+.partner-desc { font-size: 12px; color: rgba(255,255,255,0.3); line-height: 1.55; font-weight: 300; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .story-grid   { grid-template-columns: 1fr; gap: 48px; }
+  .mission-grid { grid-template-columns: 1fr; gap: 40px; }
+  .team-grid    { grid-template-columns: repeat(2, 1fr); }
+  .story-quote  { position: static; margin-top: 16px; max-width: 100%; }
+  .story-accent { display: none; }
+}
+@media (max-width: 768px) {
+  .partners-grid { grid-template-columns: 1fr 1fr; }
+  .team-grid     { grid-template-columns: 1fr 1fr; }
+  .values-grid   { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .team-grid     { grid-template-columns: 1fr; }
+  .partners-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== NAVIGATION ====================
+     Active link: "About" has class="active"
+     Links use relative paths back to root index.html
+     ===================================================== -->
+<nav id="navbar">
+  <a class="nav-logo" href="../index.html">
+    <div class="logo-emblem"><span>L</span></div>
+    <div class="logo-text">
+      <strong>Limburg</strong>
+      <span>German Cultural Center</span>
+    </div>
+  </a>
+  <ul class="nav-menu">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="german-language.html">German Language</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="heritage.html">Heritage</a></li>
+    <li><a href="news.html">News</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="german-language.html#register" class="nav-btn">Enroll Now</a>
+    <a href="../index.html#donate" class="nav-donate">Donate</a>
+  </div>
+  <button class="nav-hamburger" id="hamburger" aria-label="Open menu"
+    onclick="var d=document.getElementById('mobileMenu');d.style.display=d.style.display==='block'?'none':'block'">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile drawer -->
+<div id="mobileMenu" class="mobile-menu">
+  <ul>
+    <li><a href="../index.html"          onclick="document.getElementById('mobileMenu').style.display='none'">Home</a></li>
+    <li><a href="german-language.html"   onclick="document.getElementById('mobileMenu').style.display='none'">German Language</a></li>
+    <li><a href="services.html"          onclick="document.getElementById('mobileMenu').style.display='none'">Services</a></li>
+    <li><a href="about.html"             onclick="document.getElementById('mobileMenu').style.display='none'">About</a></li>
+    <li><a href="heritage.html"          onclick="document.getElementById('mobileMenu').style.display='none'">Heritage</a></li>
+    <li><a href="news.html"              onclick="document.getElementById('mobileMenu').style.display='none'">News</a></li>
+  </ul>
+  <div class="mobile-menu-btns">
+    <a href="german-language.html#register" onclick="document.getElementById('mobileMenu').style.display='none'"
+       style="background:transparent;border:1px solid #C41E3A;color:#fff;padding:10px 22px;font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;">Enroll Now</a>
+    <a href="../index.html#donate"
+       style="background:#C9A84C;color:#080808;padding:10px 20px;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Donate</a>
+  </div>
+</div>
+
+
+<!-- ==================== PAGE HERO ====================
+     BACKGROUND IMAGE INSTRUCTIONS:
+     1. Save the building photo as: assets/images/hero/building.jpg
+     2. Add this CSS inline or in the <style> above:
+        .page-hero { background-image: url('../assets/images/hero/building.jpg'); }
+     The dark overlay (.page-hero::before) is already in shared.css
+     and keeps all text fully readable on any photo.
+     ===================================================== -->
+<div class="page-hero">
+  <!-- Geometric grid background decoration (same as homepage) -->
+  <div class="page-hero-geo">
+    <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="200" x2="1200" y2="200" stroke="white" stroke-width="0.5"/>
+      <line x1="0" y1="400" x2="1200" y2="400" stroke="white" stroke-width="0.5"/>
+      <line x1="0" y1="600" x2="1200" y2="600" stroke="white" stroke-width="0.5"/>
+      <line x1="200" y1="0" x2="200" y2="800" stroke="white" stroke-width="0.5"/>
+      <line x1="500" y1="0" x2="500" y2="800" stroke="white" stroke-width="0.5"/>
+      <line x1="900" y1="0" x2="900" y2="800" stroke="white" stroke-width="0.5"/>
+    </svg>
+  </div>
+  <!-- German flag accent bar (right edge) -->
+  <div class="page-hero-flag"><div class="f1"></div><div class="f2"></div><div class="f3"></div></div>
+  <div class="page-hero-line"></div>
+
+  <div class="page-hero-content">
+    <div class="page-hero-tag">
+      <div class="page-hero-dot"></div>
+      <div class="page-hero-tag-text">Est. February 2026 — Limbe, Cameroon</div>
+    </div>
+    <!-- TO EDIT: Change the headline text below -->
+    <h1 class="page-hero-title">
+      About <em>Limburg</em><br>
+      <strong>Cultural Center.</strong>
+    </h1>
+    <!-- TO EDIT: Change the subtitle text below -->
+    <p class="page-hero-sub">
+      Preserving and sharing German culture, language, and heritage in Limbe
+      since February 2026 — a bridge between Cameroon and Germany.
+    </p>
+  </div>
+</div>
+
+
+<!-- ==================== OUR STORY ==================== -->
+<section class="story-section">
+  <div class="story-grid">
+
+    <!-- Left column: founder photo + pull quote -->
+    <div class="story-image-wrap">
+      <div class="story-img">
+        <!--
+          IMAGE: Founder or center interior photo
+          File: assets/images/about/founder.jpg
+          Replace this div with: <img src="../assets/images/about/founder.jpg" alt="Founder">
+        -->
+        Add image: assets/images/about/founder.jpg
+      </div>
+      <div class="story-accent"></div>
+      <!-- Pull quote overlaying the bottom-left of the photo -->
+      <div class="story-quote">
+        <!-- TO EDIT: Change this quote to a real founder quote -->
+        <p>"Our mission is simple — to make Germany accessible to every Cameroonian who dares to dream."</p>
+        <span>— Founding Vision, Culture Splendours</span>
+      </div>
+    </div>
+
+    <!-- Right column: narrative text -->
+    <div class="story-text">
+      <div class="s-label">Our Story</div>
+      <h2 class="s-title">Who We <em>Are</em></h2>
+
+      <!-- TO EDIT: Update with real founding story details -->
+      <p>The <strong>Limburg German Cultural Center</strong> (Deutsches Kulturzentrum Limburg) was founded in February 2026 by <strong>Culture Splendours</strong> — a Limbe-based civil society organisation promoting the cultural richness of Cameroon and its connections to the world.</p>
+      <p>Named after Engineer Limburg, the German colonial engineer who protected the freshwater river now bearing his name, our center honors this deep historical link between Germany and Limbe. We believe culture is the most powerful bridge between peoples.</p>
+      <p>Today, the Limburg German Cultural Center offers eight core services — from certified German language courses and a historical photo gallery to vocational training, tourism, a café, and more — all designed to open real doors between Cameroon and Germany.</p>
+
+      <!-- Inline statistics row -->
+      <div class="story-stats">
+        <!-- TO EDIT: Update numbers when real data is available -->
+        <div class="story-stat"><strong>2026</strong><span>Founded</span></div>
+        <div class="story-stat"><strong>8</strong><span>Core Services</span></div>
+        <div class="story-stat"><strong>3,000 m²</strong><span>Facility</span></div>
+        <div class="story-stat"><strong>100+</strong><span>Students</span></div>
+      </div>
+
+      <a href="german-language.html" class="btn-red">Explore Our Programs</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ==================== MISSION & VALUES ==================== -->
+<section class="mission-section">
+  <div class="mission-grid">
+
+    <div class="mission-text">
+      <div class="s-label">Our Purpose</div>
+      <h2 class="s-title" style="color:var(--white)">Mission &amp; <em>Values</em></h2>
+      <!-- TO EDIT: Update mission statement -->
+      <p>Our mission is to preserve and celebrate German cultural heritage in Limbe while creating real, tangible pathways for Cameroonians to study, work, and live in Germany.</p>
+      <p>We are committed to quality education, cultural exchange, and community empowerment — guided by the belief that every person deserves access to opportunity, regardless of where they start.</p>
+      <p>As one of the symbols of German-Cameroon cooperation in Cameroon, we operate through a sustainable model combining services, grants, donations, and strategic partnerships.</p>
+    </div>
+
+    <div>
+      <div class="s-sub" style="color:rgba(255,255,255,0.4);margin-bottom:0">Our core values guide everything we do.</div>
+      <!-- TO EDIT: Change icons and descriptions to match your values -->
+      <div class="values-grid" style="margin-top:24px">
+        <div class="value-card">
+          <div class="value-icon">🎓</div>
+          <div class="value-title">Education First</div>
+          <p class="value-desc">Quality German language instruction that meets international standards and opens doors to Germany.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🤝</div>
+          <div class="value-title">Cultural Bridge</div>
+          <p class="value-desc">Fostering genuine understanding and friendship between Cameroonian and German communities.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🌍</div>
+          <div class="value-title">Heritage Pride</div>
+          <p class="value-desc">Preserving and celebrating the shared colonial-era history that connects Limbe to Germany.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">💡</div>
+          <div class="value-title">Real Opportunity</div>
+          <p class="value-desc">Creating practical, achievable pathways to work, study, and settle in Germany.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ==================== HISTORY TIMELINE ==================== -->
+<section class="history-section">
+  <div class="s-label">Our Journey</div>
+  <h2 class="s-title">A Brief <em>History</em></h2>
+  <p class="s-sub">From colonial-era legacy to a modern cultural center — the story of Limburg.</p>
+
+  <div class="timeline">
+
+    <!-- TO EDIT: Add or remove timeline entries as needed -->
+
+    <div class="tl-item">
+      <div class="tl-year">1884</div>
+      <div class="tl-dot"></div>
+      <div>
+        <div class="tl-content-title">German Colonial Era Begins</div>
+        <p class="tl-content-desc">Germany establishes its protectorate over Kamerun. German engineers, architects, and administrators arrive, including the engineer who will lend his name to the river and eventually the city.</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1900s</div>
+      <div class="tl-dot"></div>
+      <div>
+        <div class="tl-content-title">Engineer Limburg Protects the River</div>
+        <p class="tl-content-desc">German engineer Limburg, working in the area then known as Victoria, protects the local freshwater river from pollution. In recognition, the local community names the river "Limbe" after him.</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1982</div>
+      <div class="tl-dot"></div>
+      <div>
+        <div class="tl-content-title">Victoria Renamed Limbe</div>
+        <p class="tl-content-desc">By presidential decree, the city of Victoria is officially renamed Limbe — preserving the memory of Engineer Limburg and the German-Cameroonian connection to this day.</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">2025</div>
+      <div class="tl-dot"></div>
+      <div>
+        <div class="tl-content-title">Culture Splendours Founded</div>
+        <p class="tl-content-desc">Culture Splendours is established in Limbe with a mission to promote the cultural richness of Cameroon and its connections to Germany and the world.</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">2026</div>
+      <div class="tl-dot"></div>
+      <div>
+        <div class="tl-content-title">Limburg German Cultural Center Opens</div>
+        <p class="tl-content-desc">February 2026: The Limburg German Cultural Center opens its doors in Isokolo, Limbe — offering eight core services including Germany's language courses, a historical gallery, library, vocational training, and more.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ==================== TEAM ==================== -->
+<section class="team-section">
+  <div class="s-label">The People</div>
+  <h2 class="s-title">Our <em>Team</em></h2>
+  <p class="s-sub">Dedicated professionals committed to building the Cameroon-Germany bridge.</p>
+
+  <div class="team-grid">
+
+    <!-- TO EDIT: Replace placeholder divs with real photos and update names/roles/bios -->
+
+    <div class="team-card">
+      <div class="team-photo">
+        <!--
+          FILE: assets/images/team/team-1.jpg
+          Replace this div with:
+          <img src="../assets/images/team/team-1.jpg" alt="[Name]">
+        -->
+        assets/images/team/team-1.jpg
+      </div>
+      <div class="team-name"><!-- TO EDIT: Full Name --></div>
+      <div class="team-role">Executive Director</div>
+      <p class="team-bio"><!-- TO EDIT: Short bio, 1-2 sentences. --></p>
+    </div>
+
+    <div class="team-card">
+      <div class="team-photo">
+        <!-- FILE: assets/images/team/team-2.jpg -->
+        assets/images/team/team-2.jpg
+      </div>
+      <div class="team-name"><!-- TO EDIT: Full Name --></div>
+      <div class="team-role">Head of German Language School</div>
+      <p class="team-bio"><!-- TO EDIT: Short bio. --></p>
+    </div>
+
+    <div class="team-card">
+      <div class="team-photo">
+        <!-- FILE: assets/images/team/team-3.jpg -->
+        assets/images/team/team-3.jpg
+      </div>
+      <div class="team-name"><!-- TO EDIT: Full Name --></div>
+      <div class="team-role">Cultural Programs Manager</div>
+      <p class="team-bio"><!-- TO EDIT: Short bio. --></p>
+    </div>
+
+    <div class="team-card">
+      <div class="team-photo">
+        <!-- FILE: assets/images/team/team-4.jpg -->
+        assets/images/team/team-4.jpg
+      </div>
+      <div class="team-name"><!-- TO EDIT: Full Name --></div>
+      <div class="team-role">Tourism &amp; Heritage Officer</div>
+      <p class="team-bio"><!-- TO EDIT: Short bio. --></p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ==================== PARTNERS ==================== -->
+<section class="partners-section">
+  <div class="s-label">Collaborations</div>
+  <h2 class="s-title" style="color:var(--white)">Our <em>Partners</em></h2>
+  <p class="s-sub" style="color:rgba(255,255,255,0.4)">Working together to strengthen German-Cameroon cultural and professional ties.</p>
+
+  <div class="partners-grid">
+
+    <!-- TO EDIT: Replace with real partner logos and descriptions -->
+
+    <div class="partner-card">
+      <div class="partner-logo">
+        <!--
+          PARTNER LOGO: assets/images/about/partner-1.png
+          Replace div with: <img src="../assets/images/about/partner-1.png" alt="Partner Name" style="height:40px;width:auto;filter:brightness(0) invert(1);opacity:0.6">
+        -->
+        Logo Placeholder
+      </div>
+      <div class="partner-name"><!-- TO EDIT: Partner name --></div>
+      <p class="partner-desc"><!-- TO EDIT: Brief description of the partnership. --></p>
+    </div>
+
+    <div class="partner-card">
+      <div class="partner-logo">Logo Placeholder</div>
+      <div class="partner-name"><!-- TO EDIT: Partner name --></div>
+      <p class="partner-desc"><!-- TO EDIT: Brief description. --></p>
+    </div>
+
+    <div class="partner-card">
+      <div class="partner-logo">Logo Placeholder</div>
+      <div class="partner-name"><!-- TO EDIT: Partner name --></div>
+      <p class="partner-desc"><!-- TO EDIT: Brief description. --></p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="footer-top">
+
+    <div class="footer-brand">
+      <a class="nav-logo" href="../index.html" style="text-decoration:none">
+        <div class="logo-emblem"><span>L</span></div>
+        <div class="logo-text">
+          <strong>Limburg</strong>
+          <span>German Cultural Center</span>
+        </div>
+      </a>
+      <p>Bridging Cameroon and Germany through language, culture, and real opportunity.</p>
+    </div>
+
+    <div class="footer-col">
+      <h5>About</h5>
+      <ul>
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="about.html#team">The Team</a></li>
+        <li><a href="about.html#history">History</a></li>
+        <li><a href="about.html#partners">Partners</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h5>Services</h5>
+      <ul>
+        <li><a href="german-language.html">German Language</a></li>
+        <li><a href="services.html#gallery">Photo Gallery</a></li>
+        <li><a href="services.html#vocational">Vocational Training</a></li>
+        <li><a href="services.html#events">Events</a></li>
+        <li><a href="heritage.html">Tourism</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="tel:+237678001127">678 001 127</a></li>
+        <li><a href="mailto:info@limburggermanculturalcenter.cm">info@limburggcc.cm</a></li>
+        <li><a href="contact.html">Isokolo, Limbe</a></li>
+        <li><a href="http://www.limburggermanculturalcenter.cm" target="_blank">www.limburggcc.cm</a></li>
+      </ul>
+    </div>
+
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Limburg German Cultural Center — Deutsches Kulturzentrum Limburg — All Rights Reserved</p>
+    <div class="footer-flags">
+      <div class="flag" title="Germany">
+        <span style="background:#1a1a1a;border:1px solid rgba(255,255,255,0.12)"></span>
+        <span style="background:#C41E3A"></span>
+        <span style="background:#C9A84C"></span>
+      </div>
+      <div class="flag" title="Cameroon">
+        <span style="background:#007A5E"></span>
+        <span style="background:#CE1126"></span>
+        <span style="background:#FCD116"></span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Smooth scroll — handles any <a href="#section"> on this page */
+document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+  a.addEventListener('click', function(e) {
+    var id = a.getAttribute('href').replace('#','');
+    if (!id) return;
+    var el = document.getElementById(id);
+    if (!el) return;
+    e.preventDefault();
+    el.scrollIntoView({ behavior:'smooth', block:'start' });
+    setTimeout(function(){ window.scrollBy(0,-76); }, 10);
+  });
+});
+</script>
+
+</body>
+</html>

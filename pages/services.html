@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — Limburg German Cultural Center</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/shared.css">
+<style>
+
+/* =============================================================
+   SERVICES PAGE — page-specific styles
+   ============================================================= */
+
+/* ── HERO BACKGROUND IMAGE ──────────────────────────────────────
+   HOW TO ADD THE BUILDING PHOTO:
+   1. Save the photo as: assets/images/hero/building.jpg
+   2. Uncomment the background-image line below.
+   The dark overlay in shared.css keeps text readable on any photo.
+   ────────────────────────────────────────────────────────────── */
+.page-hero {
+  background-size: cover;
+  background-position: center center;
+  /* background-image: url('../assets/images/hero/building.jpg'); */
+}
+
+/* ── SERVICE SECTION LAYOUT ── */
+/* Each service alternates: text-left/image-right, then image-left/text-right */
+.service-section { padding: 100px 6%; }
+.service-section:nth-child(even) { background: var(--off); }
+.service-section:nth-child(odd)  { background: var(--white); }
+/* Special dark sections for selected services */
+.service-section.dark { background: var(--black2); }
+
+.service-grid          { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.service-grid.reversed { direction: rtl; }  /* flips left/right */
+.service-grid.reversed > * { direction: ltr; } /* reset text inside */
+
+/* Service number decoration */
+.svc-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 120px; font-weight: 700;
+  color: rgba(0,0,0,0.04); line-height: 1;
+  margin-bottom: -20px; user-select: none;
+}
+.service-section.dark .svc-num { color: rgba(255,255,255,0.03); }
+
+/* Heading overrides for dark sections */
+.service-section.dark .s-label  { color: rgba(255,255,255,0.5); }
+.service-section.dark .s-label::before { background: rgba(255,255,255,0.3); }
+.service-section.dark .s-title  { color: var(--white); }
+.service-section.dark .svc-desc-text { color: rgba(255,255,255,0.5); }
+
+/* Body text */
+.svc-desc-text { font-size: 15px; color: var(--gray); line-height: 1.9; font-weight: 300; margin-bottom: 24px; }
+.svc-desc-text strong { color: var(--black); font-weight: 600; }
+.service-section.dark .svc-desc-text strong { color: #fff; }
+
+/* Feature bullet list */
+.svc-features { list-style: none; margin: 24px 0; }
+.svc-features li {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 12px 0; border-bottom: 1px solid var(--border-light);
+  font-size: 13px; color: var(--gray); font-weight: 300; line-height: 1.5;
+}
+.svc-features li:first-child { border-top: 1px solid var(--border-light); }
+.service-section.dark .svc-features li { border-color: var(--border); color: rgba(255,255,255,0.45); }
+.svc-features li::before { content: '→'; color: var(--red); font-size: 12px; flex-shrink: 0; margin-top: 1px; }
+
+/* Pricing badge strip */
+.price-strip { display: flex; gap: 16px; flex-wrap: wrap; margin: 24px 0; }
+.price-badge-item {
+  background: var(--off); border: 1px solid var(--border-light);
+  padding: 14px 20px;
+}
+.service-section.dark .price-badge-item { background: rgba(255,255,255,0.05); border-color: var(--border); }
+.price-badge-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); margin-bottom: 4px; }
+.service-section.dark .price-badge-label { color: rgba(255,255,255,0.3); }
+.price-badge-value { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600; color: var(--black); line-height: 1; }
+.service-section.dark .price-badge-value { color: #fff; }
+.price-badge-note { font-size: 11px; color: var(--gray); margin-top: 3px; }
+.service-section.dark .price-badge-note { color: rgba(255,255,255,0.3); }
+
+/* IMAGE SLOTS ─────────────────────────────────────────────────
+   Each service has one large image slot.
+   HOW TO ADD AN IMAGE:
+   1. Save your photo to the path shown inside each placeholder.
+   2. Replace the <div class="img-slot"> with an <img> tag.
+   Example replacement:
+     <img src="../assets/images/services/gallery.jpg" alt="Photo Gallery">
+   ─────────────────────────────────────────────────────────── */
+.img-slot {
+  width: 100%; aspect-ratio: 4/3;
+  background: var(--off); position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.service-section.dark .img-slot { background: var(--black3); }
+.img-slot-label {
+  font-family: 'Outfit', sans-serif; font-size: 10px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(0,0,0,0.2); text-align: center; padding: 16px;
+}
+.service-section.dark .img-slot-label { color: rgba(255,255,255,0.15); }
+
+/* Red accent line on image */
+.img-slot::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 3px; background: var(--red);
+}
+
+/* Multi-image grid (2 images stacked/side) */
+.img-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+.img-grid-2 .img-slot { aspect-ratio: 1; }
+.img-grid-tall { display: grid; grid-template-rows: 1fr 1fr; gap: 4px; height: 480px; }
+.img-grid-tall .img-slot { aspect-ratio: auto; }
+
+/* Vocational course tags */
+.course-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.course-tag  {
+  background: var(--off); border: 1px solid var(--border-light);
+  padding: 7px 14px; font-size: 12px; color: var(--gray); font-weight: 300;
+}
+.service-section.dark .course-tag { background: rgba(255,255,255,0.05); border-color: var(--border); color: rgba(255,255,255,0.45); }
+
+/* ── QUICK JUMP NAV ── */
+.services-quicknav {
+  background: var(--black); border-bottom: 1px solid var(--border);
+  padding: 0; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch;
+}
+.services-quicknav-inner { display: inline-flex; min-width: 100%; }
+.qnav-item {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 18px 28px; font-size: 11px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(255,255,255,0.4); border-right: 1px solid var(--border);
+  text-decoration: none; transition: all 0.2s; cursor: pointer;
+}
+.qnav-item:hover { color: #fff; background: rgba(255,255,255,0.04); }
+.qnav-num { color: var(--red); font-family: 'Cormorant Garamond', serif; font-size: 14px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .service-grid, .service-grid.reversed { grid-template-columns: 1fr; direction: ltr; gap: 48px; }
+  .img-grid-2 { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .price-strip { flex-direction: column; }
+  .course-tags .course-tag { font-size: 11px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== NAVIGATION ==================== -->
+<nav id="navbar">
+  <a class="nav-logo" href="../index.html">
+    <div class="logo-emblem"><span>L</span></div>
+    <div class="logo-text"><strong>Limburg</strong><span>German Cultural Center</span></div>
+  </a>
+  <ul class="nav-menu">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="german-language.html">German Language</a></li>
+    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="heritage.html">Heritage</a></li>
+    <li><a href="news.html">News</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="german-language.html#register" class="nav-btn">Enroll Now</a>
+    <a href="../index.html#donate" class="nav-donate">Donate</a>
+  </div>
+  <button class="nav-hamburger" id="hamburger" aria-label="Open menu"
+    onclick="var d=document.getElementById('mobileMenu');d.style.display=d.style.display==='block'?'none':'block'">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile drawer -->
+<div id="mobileMenu" class="mobile-menu">
+  <ul>
+    <li><a href="../index.html"        onclick="document.getElementById('mobileMenu').style.display='none'">Home</a></li>
+    <li><a href="german-language.html" onclick="document.getElementById('mobileMenu').style.display='none'">German Language</a></li>
+    <li><a href="services.html"        onclick="document.getElementById('mobileMenu').style.display='none'">Services</a></li>
+    <li><a href="about.html"           onclick="document.getElementById('mobileMenu').style.display='none'">About</a></li>
+    <li><a href="heritage.html"        onclick="document.getElementById('mobileMenu').style.display='none'">Heritage</a></li>
+    <li><a href="news.html"            onclick="document.getElementById('mobileMenu').style.display='none'">News</a></li>
+  </ul>
+  <div class="mobile-menu-btns">
+    <a href="german-language.html#register" style="background:transparent;border:1px solid #C41E3A;color:#fff;padding:10px 22px;font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;">Enroll Now</a>
+    <a href="../index.html#donate" style="background:#C9A84C;color:#080808;padding:10px 20px;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Donate</a>
+  </div>
+</div>
+
+
+<!-- ==================== PAGE HERO ====================
+   TO ADD BUILDING PHOTO:
+   Uncomment: .page-hero { background-image: url('../assets/images/hero/building.jpg'); }
+   in the <style> block above.
+   ===================================================== -->
+<div class="page-hero">
+  <div class="page-hero-geo">
+    <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="200" x2="1200" y2="200" stroke="white" stroke-width="0.5"/>
+      <line x1="0" y1="400" x2="1200" y2="400" stroke="white" stroke-width="0.5"/>
+      <line x1="0" y1="600" x2="1200" y2="600" stroke="white" stroke-width="0.5"/>
+      <line x1="200" y1="0" x2="200" y2="800" stroke="white" stroke-width="0.5"/>
+      <line x1="500" y1="0" x2="500" y2="800" stroke="white" stroke-width="0.5"/>
+      <line x1="900" y1="0" x2="900" y2="800" stroke="white" stroke-width="0.5"/>
+    </svg>
+  </div>
+  <div class="page-hero-flag"><div class="f1"></div><div class="f2"></div><div class="f3"></div></div>
+  <div class="page-hero-line"></div>
+  <div class="page-hero-content">
+    <div class="page-hero-tag">
+      <div class="page-hero-dot"></div>
+      <div class="page-hero-tag-text">8 Services — One Center</div>
+    </div>
+    <!-- TO EDIT: Page headline -->
+    <h1 class="page-hero-title">Our <em>Services</em><br><strong>for You.</strong></h1>
+    <!-- TO EDIT: Subtitle -->
+    <p class="page-hero-sub">From certified German language courses to tourism, gallery, café, and vocational training — everything under one roof at Isokolo, Limbe.</p>
+  </div>
+</div>
+
+<!-- Quick-jump navigation to each service -->
+<nav class="services-quicknav" aria-label="Jump to service">
+  <div class="services-quicknav-inner">
+    <a class="qnav-item" href="#gallery">    <span class="qnav-num">01</span> Photo Gallery</a>
+    <a class="qnav-item" href="#language">   <span class="qnav-num">02</span> German Language</a>
+    <a class="qnav-item" href="#library">    <span class="qnav-num">03</span> Library</a>
+    <a class="qnav-item" href="#events">     <span class="qnav-num">04</span> Events</a>
+    <a class="qnav-item" href="#vocational"> <span class="qnav-num">05</span> Vocational Training</a>
+    <a class="qnav-item" href="#cafe">       <span class="qnav-num">06</span> Café</a>
+    <a class="qnav-item" href="#tourism">    <span class="qnav-num">07</span> Tourism</a>
+    <a class="qnav-item" href="#transport">  <span class="qnav-num">08</span> Transport</a>
+  </div>
+</nav>
+
+
+<!-- ==================== 01 PHOTO GALLERY ==================== -->
+<div class="service-section" id="gallery">
+  <div class="service-grid">
+
+    <div>
+      <div class="svc-num">01</div>
+      <div class="s-label">Cultural Heritage</div>
+      <h2 class="s-title">Historical Photo <em>Gallery</em></h2>
+      <!-- TO EDIT: Update description -->
+      <p class="svc-desc-text">At the heart of the Limburg Center is a <strong>dedicated exhibition hall</strong> displaying photographs, artifacts, and paintings from the German Colonial era in Cameroon. Every exhibit carries a contextual caption — educating visitors while honoring the shared history between our two nations.</p>
+      <p class="svc-desc-text">Whether you are a history enthusiast, a researcher, a tourist, or a student — the gallery offers a unique window into a defining era of Cameroon's past.</p>
+      <div class="price-strip">
+        <!-- TO EDIT: Update prices -->
+        <div class="price-badge-item">
+          <div class="price-badge-label">Children</div>
+          <div class="price-badge-value">500 FCFA</div>
+          <div class="price-badge-note">Ages 6–17 per visit</div>
+        </div>
+        <div class="price-badge-item">
+          <div class="price-badge-label">Adults</div>
+          <div class="price-badge-value">1,000 FCFA</div>
+          <div class="price-badge-note">Per visit</div>
+        </div>
+        <div class="price-badge-item" style="border-color:var(--gold);background:rgba(201,168,76,0.05)">
+          <div class="price-badge-label" style="color:var(--gold)">Members</div>
+          <div class="price-badge-value" style="color:var(--gold)">Free</div>
+          <div class="price-badge-note">With annual subscription</div>
+        </div>
+      </div>
+      <a href="contact.html" class="btn-red">Book a Visit</a>
+    </div>
+
+    <div>
+      <!--
+        IMAGE: Gallery hall interior or featured exhibit
+        FILE:  assets/images/services/gallery.jpg
+        Replace the div below with:
+        <img src="../assets/images/services/gallery.jpg" alt="Historical Photo Gallery">
+      -->
+      <div class="img-slot">
+        <div class="img-slot-label">Add photo: assets/images/services/gallery.jpg</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ==================== 02 GERMAN LANGUAGE ==================== -->
+<div class="service-section" id="language">
+  <div class="service-grid reversed">
+
+    <div>
+      <!--
+        IMAGE: Classroom or students learning
+        FILE:  assets/images/services/language-class.jpg
+      -->
+      <div class="img-slot">
+        <div class="img-slot-label">Add photo: assets/images/services/language-class.jpg</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="svc-num">02</div>
+      <div class="s-label">A1 to B2 Certification</div>
+      <h2 class="s-title">German Language <em>School</em></h2>
+      <!-- TO EDIT: Update description -->
+      <p class="svc-desc-text">Our German Language School offers <strong>internationally recognized A1–B2 certification</strong> with monthly intakes. Choose from Morning, Evening, Weekend, or Online classes. Each cohort runs for 2 months, 5 days per week, 2h30 per day.</p>
+      <ul class="svc-features">
+        <li>A1, A2, B1, B2 levels — Visa, Ausbildung &amp; University preparation</li>
+        <li>Small group sizes for personal attention</li>
+        <li>Physical classes in Limbe + remote Online option</li>
+        <li>Monthly intake — start when you are ready</li>
+        <li>Student portal with live Jitsi classroom access</li>
+      </ul>
+      <a href="german-language.html" class="btn-red">View Full Course Details →</a>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ==================== 03 LIBRARY ==================== -->
+<div class="service-section dark" id="library">
+  <div class="service-grid">
+
+    <div>
+      <div class="svc-num">03</div>
+      <div class="s-label">Knowledge Hub</div>
+      <h2 class="s-title">German <em>Library</em></h2>
+      <!-- TO EDIT: Update description -->
+      <p class="svc-desc-text">Our <strong>library is a quiet research and reading environment</strong> stocked with German books on history, science, technology, fiction, and professional development. Members also enjoy access to a growing e-book collection and German movies.</p>
+      <p class="svc-desc-text">The library supports students from our German Language Clubs in local schools and universities, providing a dedicated space for focused study.</p>
+      <ul class="svc-features">
+        <li>Physical books: history, science, fiction, academic, professional</li>
+        <li>E-book and digital resource access for members</li>
+        <li>German movies and documentaries — permanently running</li>
+        <li>Quiet study tables and comfortable seating</li>
+        <li>Free Wi-Fi for research and study</li>
+      </ul>
+      <a href="contact.html" class="btn-white-outline">Access the Library</a>
+    </div>
+
+    <div>
+      <!--
+        IMAGE: Library interior, bookshelves
+        FILE:  assets/images/services/library.jpg
+      -->
+      <div class="img-slot">
+        <div class="img-slot-label">Add photo: assets/images/services/library.jpg</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ==================== 04 EVENTS & CONFERENCES ==================== -->
+<div class="service-section" id="events">
+  <div class="service-grid reversed">
+
+    <div>
+      <!--
+        IMAGE: Panel discussion or event
+        FILE:  assets/images/services/events.jpg
+      -->
+      <div class="img-slot">
+        <div class="img-slot-label">Add photo: assets/images/services/events.jpg</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="svc-num">04</div>
+      <div class="s-label">Community &amp; Networking</div>
+      <h2 class="s-title">Events &amp; <em>Conferences</em></h2>
+      <!-- TO EDIT: Update description -->
+      <p class="svc-desc-text">Every month, Limburg Cultural Center organises at least <strong>two panel discussions</strong> on trending research topics about Germany. We also host sociocultural, academic, professional, and business events to strengthen German-Cameroon cooperation ties.</p>
+      <p class="svc-desc-text">Our event spaces are also available for hire by organizations and institutions seeking a professional cultural venue in Limbe.</p>
+      <ul class="svc-features">
+        <li>Monthly panel discussions — open to the public</li>
+        <li>Sociocultural and academic conferences</li>
+        <li>Business networking and trade events</li>
+        <li>Cultural evenings: film screenings, art exhibitions, music</li>
+        <li>Venue hire available for external organizations</li>
+      </ul>
+      <a href="contact.html" class="btn-red">Enquire About Events</a>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ==================== 05 VOCATIONAL TRAINING ==================== -->
+<div class="service-section" id="vocational">
+  <div class="service-grid">
+
+    <div>
+      <div class="svc-num">05</div>
+      <div class="s-label">Skills &amp; Employment</div>
+      <h2 class="s-title">Vocational <em>Training</em></h2>
+      <!-- TO EDIT: Update description -->
+      <p class="svc-desc-text">To enable youths to take advantage of the growing demand for skilled workers in <strong>Cameroon and Germany</strong>, our Vocational Training Department offers practical, career-ready courses across multiple fields.</p>
+      <p class="svc-desc-text">Graduates are better equipped to enter the job market in Cameroon and to pursue opportunities in Germany through the Ausbildung (apprenticeship) system.</p>
+      <!-- TO EDIT: Add or remove courses as your offering grows -->
+      <div class="course-tags">
+        <span class="course-tag">Fashion Design</span>
+        <span class="course-tag">Esthetics</span>
+        <span class="course-tag">Hair Dressing</span>
+        <span class="course-tag">Tourism</span>
+        <span class="course-tag">Cabin Crew</span>
+        <span class="course-tag">Driving</span>
+        <span class="course-tag">Information Technology</span>
+        <span class="course-tag">Handicrafts</span>
+        <span class="course-tag">Dancing</span>
+        <span class="course-tag">Cake Artistry</span>
+        <span class="course-tag">Engineering</span>
+        <span class="course-tag">Hotel &amp; Catering</span>
+        <span class="course-tag">Office Administration</span>
+        <span class="course-tag">Accounting</span>
+        <span class="course-tag">Management &amp; Finance</span>
+      </div>
+      <a href="contact.html" class="btn-red" style="margin-top:28px;display:inline-block">Enquire About Training</a>
+    </div>
+
+    <div>
+      <!--
+        IMAGE: Students in vocational training
+        FILE:  assets/images/services/vocational.jpg
+      -->
+      <div class="img-slot">
+        <div class="img-slot-label">Add photo: assets/images/services/vocational.jpg</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ==================== 06 CAFÉ ==================== -->
+<div class="service-section dark" id="cafe">
+  <div class="service-grid reversed">
+
+    <div>
+      <!--
+        IMAGE: Café terrace or interior
+        FILE:  assets/images/services/cafe.jpg
+      -->
+      <div class="img-slot">
+        <div class="img-slot-label">Add photo: assets/images/services/cafe.jpg</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="svc-num">06</div>
+      <div class="s-label">Haus der Freundschaft</div>
+      <h2 class="s-title">Café &amp; <em>Restaurant</em></h2>
+      <!-- TO EDIT: Update description -->
+      <p class="svc-desc-text">The <strong>Haus der Freundschaft</strong> (House of Friendship) is a relaxation terrace, snack bar, and restaurant with an emphasis on <strong>German cuisine and drinks</strong>. It is a daily meeting point for German workers in Cameroon, the diaspora, and fans of German culture in Limbe.</p>
+      <p class="svc-desc-text">Bundesliga matches are shown live on LED screens. Businessmen schedule meetings here. Students unwind after class. Everyone is welcome.</p>
+      <ul class="svc-features">
+        <li>German cuisine and liqueurs — authentic flavors</li>
+        <li>Bundesliga live on LED screens every matchday</li>
+        <li>Relaxation terrace — ideal for meetings and social gatherings</li>
+        <li>Snack bar and full restaurant service</li>
+        <li>Private event bookings and catering available</li>
+      </ul>
+      <a href="contact.html" class="btn-white-outline">Make a Reservation</a>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ==================== 07 TOURISM ==================== -->
+<div class="service-section" id="tourism">
+  <div class="service-grid">
+
+    <div>
+      <div class="svc-num">07</div>
+      <div class="s-label">Explore Cameroon</div>
+      <h2 class="s-title">Tourism <em>Office</em></h2>
+      <!-- TO EDIT: Update description -->
+      <p class="svc-desc-text">Our Tourism Office offers <strong>unique package tours</strong> to the most spectacular sites in Cameroon — designed for both Cameroonian explorers and international visitors from Germany and beyond. We target 100 German tourists per month.</p>
+      <ul class="svc-features">
+        <li>Limbe Botanic Garden &amp; Wildlife Centre</li>
+        <li>Mount Cameroon guided treks and volcano experiences</li>
+        <li>German colonial lighthouse and heritage site tours</li>
+        <li>Mangrove trails, beaches, caves, and waterfalls</li>
+        <li>Partner hotels at preferential rates for all budgets</li>
+        <li>Travel agency and international ticketing services</li>
+      </ul>
+      <a href="heritage.html" class="btn-red">View All Tours →</a>
+    </div>
+
+    <div>
+      <!--
+        IMAGE: Scenic Cameroon landscape or tour group
+        FILE:  assets/images/services/tourism.jpg
+      -->
+      <div class="img-slot">
+        <div class="img-slot-label">Add photo: assets/images/services/tourism.jpg</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ==================== 08 TRANSPORT ==================== -->
+<div class="service-section dark" id="transport">
+  <div class="service-grid reversed">
+
+    <div>
+      <!--
+        IMAGE: Center bus or transport vehicle
+        FILE:  assets/images/services/transport.jpg
+      -->
+      <div class="img-slot">
+        <div class="img-slot-label">Add photo: assets/images/services/transport.jpg</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="svc-num">08</div>
+      <div class="s-label">Getting Around</div>
+      <h2 class="s-title">Transport <em>Services</em></h2>
+      <!-- TO EDIT: Update description -->
+      <p class="svc-desc-text">The Limburg Center operates a <strong>bus transport service</strong> for tourists and members. We are also committed to social inclusion — providing affordable transport to <strong>underprivileged students</strong> in Limbe who cannot afford daily school transport.</p>
+      <ul class="svc-features">
+        <li>Tour transport — from the center to all tour sites</li>
+        <li>Member shuttles for events and activities</li>
+        <li>Subsidized school transport for disadvantaged pupils</li>
+        <li>Airport and hotel transfers for visiting German tourists</li>
+      </ul>
+      <a href="contact.html" class="btn-white-outline">Book Transport</a>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a class="nav-logo" href="../index.html" style="text-decoration:none">
+        <div class="logo-emblem"><span>L</span></div>
+        <div class="logo-text"><strong>Limburg</strong><span>German Cultural Center</span></div>
+      </a>
+      <p>Bridging Cameroon and Germany through language, culture, and real opportunity.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Services</h5>
+      <ul>
+        <li><a href="#gallery">Photo Gallery</a></li>
+        <li><a href="#language">German Language</a></li>
+        <li><a href="#library">Library</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#vocational">Vocational Training</a></li>
+        <li><a href="#cafe">Café</a></li>
+        <li><a href="#tourism">Tourism</a></li>
+        <li><a href="#transport">Transport</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Quick Links</h5>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="german-language.html">German Language</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="heritage.html">Heritage &amp; Tourism</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="tel:+237678001127">678 001 127</a></li>
+        <li><a href="mailto:info@limburggermanculturalcenter.cm">info@limburggcc.cm</a></li>
+        <li><a href="contact.html">Isokolo, Limbe</a></li>
+        <li><a href="http://www.limburggermanculturalcenter.cm" target="_blank">www.limburggcc.cm</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Limburg German Cultural Center — All Rights Reserved</p>
+    <div class="footer-flags">
+      <div class="flag" title="Germany"><span style="background:#1a1a1a;border:1px solid rgba(255,255,255,0.12)"></span><span style="background:#C41E3A"></span><span style="background:#C9A84C"></span></div>
+      <div class="flag" title="Cameroon"><span style="background:#007A5E"></span><span style="background:#CE1126"></span><span style="background:#FCD116"></span></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Smooth scroll for quick-nav anchor links */
+document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+  a.addEventListener('click', function(e) {
+    var id = a.getAttribute('href').replace('#','');
+    if (!id) return;
+    var el = document.getElementById(id);
+    if (!el) return;
+    e.preventDefault();
+    el.scrollIntoView({ behavior:'smooth', block:'start' });
+    setTimeout(function(){ window.scrollBy(0,-76); }, 10);
+  });
+});
+</script>
+</body>
+</html>

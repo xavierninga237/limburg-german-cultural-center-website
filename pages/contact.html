@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Limburg German Cultural Center</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/shared.css">
+<style>
+/* =============================================================
+   CONTACT PAGE — page-specific styles
+   ============================================================= */
+
+/* ── HERO ── */
+.page-hero {
+  background-size: cover;
+  background-position: center center;
+  /* background-image: url('../assets/images/hero/building.jpg'); */
+}
+
+/* ── CONTACT LAYOUT ── */
+.contact-section { background: var(--white); padding: 100px 6%; }
+.contact-grid    { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+
+/* ── CONTACT INFO BLOCKS ── */
+.info-blocks { display: flex; flex-direction: column; gap: 1px; margin-top: 40px; }
+.info-block  {
+  background: var(--off); padding: 28px 32px;
+  display: flex; align-items: flex-start; gap: 20px;
+  transition: background 0.3s;
+}
+.info-block:hover { background: var(--black); }
+.info-block:hover .info-label  { color: rgba(255,255,255,0.3); }
+.info-block:hover .info-value  { color: #fff; }
+.info-block:hover .info-value a { color: rgba(255,255,255,0.7); }
+.info-icon  {
+  width: 40px; height: 40px; background: var(--red);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0; margin-top: 2px;
+}
+.info-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); margin-bottom: 5px; transition: color 0.3s; }
+.info-value { font-size: 14px; color: var(--black); line-height: 1.7; font-weight: 300; transition: color 0.3s; }
+.info-value a { color: var(--black); text-decoration: none; transition: color 0.2s; }
+.info-value a:hover { color: var(--red); }
+
+/* Opening hours table */
+.hours-grid { display: grid; grid-template-columns: auto 1fr; gap: 6px 24px; margin-top: 10px; }
+.hours-day  { font-size: 13px; color: var(--gray); font-weight: 400; }
+.hours-time { font-size: 13px; color: var(--black); font-weight: 300; }
+
+/* Social icons row */
+.social-row { display: flex; gap: 12px; margin-top: 28px; }
+.social-btn {
+  width: 40px; height: 40px; border: 1px solid var(--border-light);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; transition: all 0.3s; text-decoration: none; color: var(--black);
+}
+.social-btn:hover { background: var(--black); color: #fff; border-color: var(--black); }
+
+/* ── CONTACT FORM ── */
+.form-card {
+  background: var(--black); padding: 52px 48px; position: relative; overflow: hidden;
+}
+.form-card::before {
+  /* Top accent bar */
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(to right, var(--red), var(--gold));
+}
+.form-card-watermark {
+  position: absolute; bottom: -20px; right: -20px;
+  font-family: 'Cormorant Garamond', serif; font-size: 100px; font-weight: 700;
+  color: rgba(255,255,255,0.02); line-height: 1; pointer-events: none; user-select: none;
+}
+.form-title    { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: #fff; margin-bottom: 6px; }
+.form-title em { font-style: italic; color: var(--red2); }
+.form-sub      { font-size: 13px; color: rgba(255,255,255,0.4); font-weight: 300; margin-bottom: 36px; line-height: 1.6; }
+
+/* Form fields */
+.form-row   { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.form-group label {
+  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.4); font-weight: 500;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%; padding: 13px 16px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.05);
+  color: #fff; font-size: 14px;
+  font-family: 'Outfit', sans-serif; outline: none;
+  transition: border-color 0.3s;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus { border-color: rgba(196,30,58,0.6); }
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: rgba(255,255,255,0.25); }
+.form-group select option { background: var(--black2); color: #fff; }
+.form-group textarea { resize: vertical; min-height: 130px; }
+
+/* Submit button */
+.form-submit {
+  width: 100%; padding: 16px; background: var(--red); border: none;
+  color: #fff; font-size: 12px; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; font-family: 'Outfit', sans-serif;
+  cursor: pointer; transition: background 0.3s; margin-top: 8px;
+}
+.form-submit:hover { background: var(--red2); }
+
+/* Success message — hidden until form submitted */
+.form-success {
+  display: none; text-align: center; padding: 48px 0;
+}
+.form-success-icon { font-size: 48px; margin-bottom: 16px; }
+.form-success h3   { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: #fff; margin-bottom: 12px; }
+.form-success p    { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.7; font-weight: 300; }
+
+/* ── MAP SECTION ── */
+.map-section { background: var(--off); padding: 0; }
+.map-container {
+  width: 100%; height: 420px; background: var(--black3);
+  position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+/*
+  HOW TO ADD A REAL MAP:
+  Option A — Google Maps embed:
+    1. Go to maps.google.com, search "Isokolo Limbe Cameroon"
+    2. Click Share → Embed a map → Copy the <iframe> code
+    3. Replace the placeholder div below with the <iframe>
+    4. Set width="100%" height="420" on the iframe
+
+  Option B — OpenStreetMap embed (free, no API key):
+    <iframe
+      src="https://www.openstreetmap.org/export/embed.html?bbox=9.1,4.0,9.3,4.1&layer=mapnik"
+      width="100%" height="420" style="border:none">
+    </iframe>
+*/
+.map-placeholder {
+  text-align: center; color: rgba(255,255,255,0.2); font-family: 'Outfit', sans-serif;
+}
+.map-placeholder-icon { font-size: 48px; margin-bottom: 16px; }
+.map-placeholder p    { font-size: 13px; letter-spacing: 0.06em; line-height: 1.8; }
+.map-placeholder a    { color: var(--red); text-decoration: none; }
+.map-placeholder a:hover { text-decoration: underline; }
+
+/* Map overlay info card */
+.map-info-card {
+  position: absolute; left: 6%; top: 50%; transform: translateY(-50%);
+  background: var(--black); padding: 28px 32px; max-width: 260px; z-index: 2;
+}
+.map-info-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--red);
+}
+.map-info-title { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: #fff; margin-bottom: 12px; }
+.map-info-line  { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.8; font-weight: 300; }
+.map-info-line strong { color: rgba(255,255,255,0.8); font-weight: 500; }
+
+/* ── WHATSAPP FLOAT BUTTON ── */
+.wa-float {
+  position: fixed; bottom: 32px; right: 32px; z-index: 300;
+  width: 56px; height: 56px; background: #25D366; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+  text-decoration: none; transition: transform 0.3s, box-shadow 0.3s;
+}
+.wa-float:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.5); }
+.wa-float svg   { width: 28px; height: 28px; fill: #fff; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+}
+@media (max-width: 600px) {
+  .form-card    { padding: 36px 24px; }
+  .form-row     { grid-template-columns: 1fr; }
+  .hours-grid   { grid-template-columns: 1fr; }
+  .map-info-card { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== NAVIGATION ==================== -->
+<nav id="navbar">
+  <a class="nav-logo" href="../index.html">
+    <div class="logo-emblem"><span>L</span></div>
+    <div class="logo-text"><strong>Limburg</strong><span>German Cultural Center</span></div>
+  </a>
+  <ul class="nav-menu">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="german-language.html">German Language</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="heritage.html">Heritage</a></li>
+    <li><a href="news.html">News</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="german-language.html#register" class="nav-btn">Enroll Now</a>
+    <a href="../index.html#donate" class="nav-donate">Donate</a>
+  </div>
+  <button class="nav-hamburger" id="hamburger" aria-label="Open menu"
+    onclick="var d=document.getElementById('mobileMenu');d.style.display=d.style.display==='block'?'none':'block'">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div id="mobileMenu" class="mobile-menu">
+  <ul>
+    <li><a href="../index.html"        onclick="document.getElementById('mobileMenu').style.display='none'">Home</a></li>
+    <li><a href="german-language.html" onclick="document.getElementById('mobileMenu').style.display='none'">German Language</a></li>
+    <li><a href="services.html"        onclick="document.getElementById('mobileMenu').style.display='none'">Services</a></li>
+    <li><a href="about.html"           onclick="document.getElementById('mobileMenu').style.display='none'">About</a></li>
+    <li><a href="heritage.html"        onclick="document.getElementById('mobileMenu').style.display='none'">Heritage</a></li>
+    <li><a href="news.html"            onclick="document.getElementById('mobileMenu').style.display='none'">News</a></li>
+  </ul>
+  <div class="mobile-menu-btns">
+    <a href="german-language.html#register" style="background:transparent;border:1px solid #C41E3A;color:#fff;padding:10px 22px;font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;">Enroll Now</a>
+    <a href="../index.html#donate" style="background:#C9A84C;color:#080808;padding:10px 20px;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Donate</a>
+  </div>
+</div>
+
+
+<!-- ==================== PAGE HERO ====================
+     TO ADD BUILDING PHOTO: uncomment background-image in <style> above
+     ===================================================== -->
+<div class="page-hero">
+  <div class="page-hero-geo">
+    <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="200" x2="1200" y2="200" stroke="white" stroke-width="0.5"/>
+      <line x1="0" y1="400" x2="1200" y2="400" stroke="white" stroke-width="0.5"/>
+      <line x1="200" y1="0" x2="200" y2="800" stroke="white" stroke-width="0.5"/>
+      <line x1="600" y1="0" x2="600" y2="800" stroke="white" stroke-width="0.5"/>
+      <line x1="1000" y1="0" x2="1000" y2="800" stroke="white" stroke-width="0.5"/>
+    </svg>
+  </div>
+  <div class="page-hero-flag"><div class="f1"></div><div class="f2"></div><div class="f3"></div></div>
+  <div class="page-hero-line"></div>
+  <div class="page-hero-content">
+    <div class="page-hero-tag"><div class="page-hero-dot"></div><div class="page-hero-tag-text">We'd love to hear from you</div></div>
+    <!-- TO EDIT: Change the headline -->
+    <h1 class="page-hero-title">Get in <em>Touch</em></h1>
+    <!-- TO EDIT: Change the subtitle -->
+    <p class="page-hero-sub">Visit us at Isokolo, Limbe — or reach us by phone, email, or WhatsApp. We respond within 24 hours.</p>
+  </div>
+</div>
+
+
+<!-- ==================== CONTACT INFO + FORM ==================== -->
+<section class="contact-section">
+  <div class="contact-grid">
+
+    <!-- LEFT: Contact information -->
+    <div>
+      <div class="s-label">Find Us</div>
+      <h2 class="s-title">Contact <em>Information</em></h2>
+      <p class="s-sub">Our team is available Monday to Saturday. Drop in, call, email, or send us a WhatsApp message.</p>
+
+      <div class="info-blocks">
+
+        <!-- Physical address -->
+        <!-- TO EDIT: Update address if it changes -->
+        <div class="info-block">
+          <div class="info-icon">📍</div>
+          <div>
+            <div class="info-label">Physical Address</div>
+            <div class="info-value">
+              Isokolo, adjacent to the market<br>
+              Limbe, South West Region<br>
+              Cameroon
+            </div>
+          </div>
+        </div>
+
+        <!-- Phone -->
+        <!-- TO EDIT: Update phone number -->
+        <div class="info-block">
+          <div class="info-icon">📞</div>
+          <div>
+            <div class="info-label">Phone &amp; WhatsApp</div>
+            <div class="info-value">
+              <a href="tel:+237678001127">+237 678 001 127</a><br>
+              <a href="https://wa.me/237678001127" target="_blank" rel="noopener" style="color:var(--red)">Chat on WhatsApp →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Email -->
+        <!-- TO EDIT: Update email address -->
+        <div class="info-block">
+          <div class="info-icon">✉️</div>
+          <div>
+            <div class="info-label">Email</div>
+            <div class="info-value">
+              <a href="mailto:info@limburggermanculturalcenter.cm">info@limburggermanculturalcenter.cm</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Website -->
+        <div class="info-block">
+          <div class="info-icon">🌐</div>
+          <div>
+            <div class="info-label">Website</div>
+            <div class="info-value">
+              <a href="http://www.limburggermanculturalcenter.cm" target="_blank" rel="noopener">
+                www.limburggermanculturalcenter.cm
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Opening hours -->
+        <!-- TO EDIT: Update opening hours -->
+        <div class="info-block">
+          <div class="info-icon">🕐</div>
+          <div>
+            <div class="info-label">Opening Hours</div>
+            <div class="info-value">
+              <div class="hours-grid">
+                <span class="hours-day">Mon – Fri</span><span class="hours-time">08:00 – 18:00</span>
+                <span class="hours-day">Saturday</span><span class="hours-time">09:00 – 14:00</span>
+                <span class="hours-day">Sunday</span><span class="hours-time">Closed</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- .info-blocks -->
+
+      <!-- Social media links -->
+      <!-- TO EDIT: Update each href with real social media URLs -->
+      <p style="font-size:13px;color:var(--gray);margin-top:28px;margin-bottom:14px;font-weight:300">Follow us on social media:</p>
+      <div class="social-row">
+        <a class="social-btn" href="#" target="_blank" rel="noopener" title="Facebook">📘</a>
+        <a class="social-btn" href="#" target="_blank" rel="noopener" title="Instagram">📸</a>
+        <a class="social-btn" href="https://wa.me/237678001127" target="_blank" rel="noopener" title="WhatsApp">💬</a>
+        <a class="social-btn" href="#" target="_blank" rel="noopener" title="YouTube">▶️</a>
+        <a class="social-btn" href="#" target="_blank" rel="noopener" title="LinkedIn">💼</a>
+      </div>
+
+    </div><!-- /contact info -->
+
+
+    <!-- RIGHT: Contact form -->
+    <div class="form-card" id="contact-form-wrap">
+      <div class="form-card-watermark">KONTAKT</div>
+
+      <h3 class="form-title">Send Us a <em>Message</em></h3>
+      <p class="form-sub">Fill in the form and we will get back to you within 24 hours — in French or English.</p>
+
+      <!--
+        FORM SUBMISSION:
+        Option A — Email service (Formspree, Web3Forms, etc.):
+          Change the form action attribute. Example with Formspree:
+          <form id="contactForm" action="https://formspree.io/f/YOUR_ID" method="POST">
+
+        Option B — n8n webhook:
+          Remove the action attribute and use the JavaScript submit handler below.
+          Update CONFIG.contactWebhook with your n8n URL.
+      -->
+      <form id="contactForm">
+
+        <!-- Name + Email row -->
+        <div class="form-row">
+          <div class="form-group" style="margin-bottom:0">
+            <label for="contactName">Full Name *</label>
+            <!-- TO EDIT: Adjust placeholder text -->
+            <input type="text" id="contactName" name="name" placeholder="Your full name" required>
+          </div>
+          <div class="form-group" style="margin-bottom:0">
+            <label for="contactEmail">Email Address *</label>
+            <input type="email" id="contactEmail" name="email" placeholder="your@email.com" required>
+          </div>
+        </div>
+
+        <!-- Phone + Subject row -->
+        <div class="form-row" style="margin-top:14px">
+          <div class="form-group" style="margin-bottom:0">
+            <label for="contactPhone">Phone / WhatsApp</label>
+            <input type="tel" id="contactPhone" name="phone" placeholder="+237 6XX XXX XXX">
+          </div>
+          <div class="form-group" style="margin-bottom:0">
+            <label for="contactSubject">Subject *</label>
+            <!-- TO EDIT: Add or remove subject options to match your services -->
+            <select id="contactSubject" name="subject" required>
+              <option value="">Select a subject</option>
+              <option value="german-language">German Language School</option>
+              <option value="gallery">Photo Gallery Visit</option>
+              <option value="library">Library Access</option>
+              <option value="events">Events &amp; Conferences</option>
+              <option value="vocational">Vocational Training</option>
+              <option value="cafe">Café Reservation</option>
+              <option value="tourism">Tourism &amp; Tours</option>
+              <option value="transport">Transport Services</option>
+              <option value="membership">Membership</option>
+              <option value="partnership">Partnership / Sponsorship</option>
+              <option value="media">Media Enquiry</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Message -->
+        <div class="form-group">
+          <label for="contactMessage">Message *</label>
+          <textarea id="contactMessage" name="message" placeholder="Tell us how we can help you..." required></textarea>
+        </div>
+
+        <!-- Language preference -->
+        <div class="form-group">
+          <label for="contactLang">Preferred reply language</label>
+          <select id="contactLang" name="language">
+            <option value="english">English</option>
+            <option value="french">Français</option>
+            <option value="german">Deutsch</option>
+          </select>
+        </div>
+
+        <button type="submit" class="form-submit" id="contactSubmitBtn">
+          Send Message →
+        </button>
+
+      </form>
+
+      <!-- Success message — shown after successful submission -->
+      <div class="form-success" id="formSuccess">
+        <div class="form-success-icon">✅</div>
+        <h3>Message Received!</h3>
+        <p>
+          Thank you for reaching out.<br>
+          We will reply to you within 24 hours.<br><br>
+          <strong style="color:var(--gold)">For urgent matters, WhatsApp us directly at +237 678 001 127.</strong>
+        </p>
+        <!-- Button to send another message -->
+        <button onclick="resetForm()"
+          style="margin-top:24px;background:transparent;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.55);padding:10px 24px;font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;font-family:'Outfit',sans-serif;cursor:pointer;">
+          Send Another Message
+        </button>
+      </div>
+
+    </div><!-- /form-card -->
+
+  </div><!-- /contact-grid -->
+</section>
+
+
+<!-- ==================== MAP ==================== -->
+<div class="map-section">
+  <div class="map-container">
+
+    <!--
+      ╔══════════════════════════════════════════════════════════╗
+      ║  HOW TO REPLACE THIS WITH A REAL MAP                    ║
+      ║                                                          ║
+      ║  OPTION A — Google Maps (requires embed code):          ║
+      ║  1. Go to maps.google.com                               ║
+      ║  2. Search: "Isokolo Limbe Cameroon"                    ║
+      ║  3. Click Share → Embed a map                           ║
+      ║  4. Copy the <iframe> HTML                              ║
+      ║  5. Replace the <div class="map-placeholder"> below     ║
+      ║     with the <iframe> (set width="100%" height="420")   ║
+      ║                                                          ║
+      ║  OPTION B — OpenStreetMap (free, no account needed):    ║
+      ║  Replace div with:                                       ║
+      ║  <iframe                                                 ║
+      ║    src="https://www.openstreetmap.org/export/embed.html?║
+      ║         bbox=9.18,4.00,9.22,4.04&layer=mapnik&marker=   ║
+      ║         4.018,9.202"                                     ║
+      ║    width="100%" height="420"                             ║
+      ║    style="border:none">                                  ║
+      ║  </iframe>                                               ║
+      ╚══════════════════════════════════════════════════════════╝
+    -->
+    <div class="map-placeholder">
+      <div class="map-placeholder-icon">🗺️</div>
+      <p>
+        Map will appear here.<br>
+        <a href="https://maps.google.com/?q=Isokolo+Limbe+Cameroon" target="_blank" rel="noopener">
+          View on Google Maps →
+        </a>
+      </p>
+    </div>
+
+    <!-- Address card overlaid on map -->
+    <div class="map-info-card">
+      <div class="map-info-title">Limburg Cultural Center</div>
+      <p class="map-info-line">
+        <strong>Isokolo</strong>, adjacent to the market<br>
+        Limbe, South West Region<br>
+        Cameroon<br><br>
+        <strong>+237 678 001 127</strong>
+      </p>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a class="nav-logo" href="../index.html" style="text-decoration:none">
+        <div class="logo-emblem"><span>L</span></div>
+        <div class="logo-text"><strong>Limburg</strong><span>German Cultural Center</span></div>
+      </a>
+      <p>Bridging Cameroon and Germany through language, culture, and real opportunity.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="tel:+237678001127">+237 678 001 127</a></li>
+        <li><a href="mailto:info@limburggermanculturalcenter.cm">info@limburggcc.cm</a></li>
+        <li><a href="https://wa.me/237678001127" target="_blank">WhatsApp Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Quick Links</h5>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="german-language.html">German Language</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="heritage.html">Heritage</a></li>
+        <li><a href="news.html">News</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Address</h5>
+      <ul>
+        <li><a href="contact.html">Isokolo, Limbe</a></li>
+        <li><a href="#">South West Region</a></li>
+        <li><a href="#">Cameroon</a></li>
+        <li><a href="http://www.limburggermanculturalcenter.cm" target="_blank">www.limburggcc.cm</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Limburg German Cultural Center — All Rights Reserved</p>
+    <div class="footer-flags">
+      <div class="flag" title="Germany"><span style="background:#1a1a1a;border:1px solid rgba(255,255,255,0.12)"></span><span style="background:#C41E3A"></span><span style="background:#C9A84C"></span></div>
+      <div class="flag" title="Cameroon"><span style="background:#007A5E"></span><span style="background:#CE1126"></span><span style="background:#FCD116"></span></div>
+    </div>
+  </div>
+</footer>
+
+<!-- ==================== WHATSAPP FLOATING BUTTON ==================== -->
+<!--
+  This button floats in the bottom-right corner on all screen sizes.
+  TO EDIT: Update the phone number in the href if it changes.
+-->
+<a class="wa-float" href="https://wa.me/237678001127?text=Hello%2C%20I%20have%20a%20question%20about%20Limburg%20Cultural%20Center."
+   target="_blank" rel="noopener" title="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script>
+/* =============================================================
+   CONTACT FORM JAVASCRIPT
+   ============================================================= */
+
+/*
+  CONFIG: Replace with your real webhook URL.
+  TO EDIT: Go to your n8n instance, create a webhook,
+  and paste the URL below.
+*/
+var CONFIG = {
+  contactWebhook: 'https://your-n8n-instance.com/webhook/lgcc-contact'
+  /* Replace with your actual n8n or form service endpoint */
+};
+
+/* Form submit handler */
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  var btn = document.getElementById('contactSubmitBtn');
+
+  /* Collect form data */
+  var payload = {
+    name:     document.getElementById('contactName').value.trim(),
+    email:    document.getElementById('contactEmail').value.trim(),
+    phone:    document.getElementById('contactPhone').value.trim(),
+    subject:  document.getElementById('contactSubject').value,
+    message:  document.getElementById('contactMessage').value.trim(),
+    language: document.getElementById('contactLang').value,
+    sentAt:   new Date().toISOString(),
+    source:   'LGCC-Contact-Page'
+  };
+
+  /* Basic validation */
+  if (!payload.name || !payload.email || !payload.subject || !payload.message) {
+    alert('Please fill in all required fields.');
+    return;
+  }
+
+  btn.textContent = 'Sending…';
+  btn.disabled    = true;
+
+  /*
+    SEND TO WEBHOOK
+    If CONFIG.contactWebhook is still the placeholder URL,
+    we skip the fetch and go straight to success (dev mode).
+    In production, replace the URL and the form will POST to n8n.
+  */
+  if (CONFIG.contactWebhook.indexOf('your-n8n-instance') !== -1) {
+    /* Dev mode: simulate success */
+    setTimeout(showSuccess, 800);
+    return;
+  }
+
+  fetch(CONFIG.contactWebhook, {
+    method:  'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body:    JSON.stringify(payload)
+  })
+  .then(function() { showSuccess(); })
+  .catch(function(err) {
+    console.warn('Contact form error:', err);
+    /* Still show success to user — check n8n logs for errors */
+    showSuccess();
+  });
+});
+
+/* Show the success state and hide the form */
+function showSuccess() {
+  document.getElementById('contactForm').style.display    = 'none';
+  document.getElementById('formSuccess').style.display    = 'block';
+}
+
+/* Reset back to the empty form */
+function resetForm() {
+  document.getElementById('contactForm').reset();
+  document.getElementById('contactForm').style.display    = 'flex';
+  document.getElementById('formSuccess').style.display    = 'none';
+  var btn = document.getElementById('contactSubmitBtn');
+  btn.textContent = 'Send Message →';
+  btn.disabled    = false;
+}
+document.getElementById('contactForm').style.display = 'flex';
+document.getElementById('contactForm').style.flexDirection = 'column';
+
+/* Smooth scroll */
+document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+  a.addEventListener('click', function(e) {
+    var id = a.getAttribute('href').replace('#','');
+    if (!id) return;
+    var el = document.getElementById(id);
+    if (!el) return;
+    e.preventDefault();
+    el.scrollIntoView({ behavior:'smooth', block:'start' });
+    setTimeout(function(){ window.scrollBy(0,-76); }, 10);
+  });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heritage &amp; Tourism — Limburg German Cultural Center</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/shared.css">
+<style>
+
+/* =============================================================
+   HERITAGE PAGE — page-specific styles
+   ============================================================= */
+
+/* ── HERO BACKGROUND IMAGE ──────────────────────────────────────
+   Save the building/landscape photo as: assets/images/hero/heritage-hero.jpg
+   Then uncomment the background-image line below.
+   ────────────────────────────────────────────────────────────── */
+.page-hero {
+  background-size: cover;
+  background-position: center center;
+  /* background-image: url('../assets/images/hero/heritage-hero.jpg'); */
+}
+
+/* ── TOUR CARDS GRID ── */
+.tours-section { background: var(--white); }
+.tours-grid    { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 64px; }
+.tour-card     { position: relative; overflow: hidden; cursor: pointer; display: flex; flex-direction: column; }
+
+/* Tour image slot */
+.tour-img {
+  width: 100%; aspect-ratio: 3/2;
+  background: var(--off); overflow: hidden; position: relative;
+  flex-shrink: 0; transition: transform 0.5s ease;
+}
+.tour-card:hover .tour-img { transform: scale(1.04); }
+.tour-img-label {
+  position: absolute; inset: 0; display: flex; align-items: center;
+  justify-content: center; font-size: 10px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: rgba(0,0,0,0.2);
+  font-family: 'Outfit', sans-serif;
+}
+/*
+  HOW TO ADD TOUR IMAGES:
+  1. Save each photo to: assets/images/tourism/
+  2. Replace <div class="tour-img"> contents with:
+     <img src="../assets/images/tourism/mount-cameroon.jpg" alt="Mount Cameroon">
+*/
+.tour-arrow {
+  position: absolute; top: 16px; right: 16px; z-index: 2;
+  width: 34px; height: 34px; background: rgba(255,255,255,0.92);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; color: var(--black); transition: all 0.3s;
+}
+.tour-card:hover .tour-arrow { background: var(--red); color: #fff; }
+
+.tour-body { padding: 24px 0; flex: 1; }
+.tour-num  { font-size: 10px; color: var(--gray); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+.tour-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: var(--black); margin-bottom: 8px; line-height: 1.3; }
+.tour-desc  { font-size: 13px; color: var(--gray); line-height: 1.65; font-weight: 300; margin-bottom: 16px; }
+.tour-meta  { display: flex; gap: 16px; flex-wrap: wrap; }
+.tour-tag   { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--red); background: rgba(196,30,58,0.06); padding: 4px 10px; }
+
+/* ── HERITAGE HISTORY ── */
+.heritage-story { background: var(--black2); overflow: hidden; position: relative; }
+.heritage-story::before {
+  content: 'ERBE'; position: absolute; right: -30px; top: 50%; transform: translateY(-50%);
+  font-family: 'Cormorant Garamond', serif; font-size: 160px; font-weight: 700;
+  color: rgba(255,255,255,0.02); white-space: nowrap; pointer-events: none;
+}
+.heritage-story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; position: relative; z-index: 1; }
+.heritage-story .s-title { color: var(--white); }
+.heritage-story .s-sub   { color: rgba(255,255,255,0.4); max-width: 100%; }
+.heritage-story-text p   { font-size: 15px; color: rgba(255,255,255,0.5); line-height: 1.9; font-weight: 300; margin-bottom: 20px; }
+.heritage-story-text p strong { color: #fff; font-weight: 600; }
+
+/* Heritage visual panel */
+.heritage-visual { display: flex; flex-direction: column; gap: 4px; }
+.heritage-img-main {
+  /*
+    MAIN HERITAGE IMAGE
+    FILE: assets/images/tourism/heritage-main.jpg
+    Replace this div with:
+    <img src="../assets/images/tourism/heritage-main.jpg" alt="German Colonial Heritage">
+  */
+  aspect-ratio: 3/2; background: var(--black3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; color: rgba(255,255,255,0.15); letter-spacing: 0.1em;
+  text-transform: uppercase; position: relative;
+}
+.heritage-img-main::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(to right, var(--red), transparent); }
+.heritage-img-row { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+.heritage-img-sm  { aspect-ratio: 1; background: var(--black3); }
+
+/* ── COLONIAL SITES ── */
+.sites-section { background: var(--off); }
+.sites-grid    { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: rgba(0,0,0,0.06); margin-top: 56px; }
+.site-card     { background: var(--off); padding: 40px 36px; transition: background 0.3s; }
+.site-card:hover { background: var(--black); }
+.site-card:hover .site-title { color: #fff; }
+.site-card:hover .site-desc  { color: rgba(255,255,255,0.45); }
+.site-card:hover .site-era   { color: rgba(255,255,255,0.25); }
+.site-icon   { font-size: 28px; margin-bottom: 16px; }
+.site-era    { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red); margin-bottom: 8px; transition: color 0.3s; }
+.site-title  { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: var(--black); margin-bottom: 10px; transition: color 0.3s; }
+.site-desc   { font-size: 13px; color: var(--gray); line-height: 1.65; font-weight: 300; transition: color 0.3s; }
+
+/* ── TOUR PACKAGES CTA ── */
+.packages-section { background: var(--red); padding: 80px 6%; position: relative; overflow: hidden; }
+.packages-section::after { content: 'REISE'; position: absolute; right: -20px; top: 50%; transform: translateY(-50%); font-family: 'Cormorant Garamond', serif; font-size: 140px; font-weight: 700; color: rgba(255,255,255,0.05); white-space: nowrap; pointer-events: none; }
+.packages-inner { display: flex; justify-content: space-between; align-items: center; gap: 48px; flex-wrap: wrap; position: relative; z-index: 1; }
+.packages-text .s-label { color: rgba(255,255,255,0.6); }
+.packages-text .s-label::before { background: rgba(255,255,255,0.4); }
+.packages-text .s-title { color: #fff; margin-bottom: 12px; }
+.packages-text .s-sub   { color: rgba(255,255,255,0.7); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .tours-grid { grid-template-columns: 1fr 1fr; }
+  .heritage-story-grid { grid-template-columns: 1fr; gap: 40px; }
+  .sites-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .tours-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== NAVIGATION ==================== -->
+<nav id="navbar">
+  <a class="nav-logo" href="../index.html">
+    <div class="logo-emblem"><span>L</span></div>
+    <div class="logo-text"><strong>Limburg</strong><span>German Cultural Center</span></div>
+  </a>
+  <ul class="nav-menu">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="german-language.html">German Language</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="heritage.html" class="active">Heritage</a></li>
+    <li><a href="news.html">News</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="german-language.html#register" class="nav-btn">Enroll Now</a>
+    <a href="../index.html#donate" class="nav-donate">Donate</a>
+  </div>
+  <button class="nav-hamburger" id="hamburger" aria-label="Open menu"
+    onclick="var d=document.getElementById('mobileMenu');d.style.display=d.style.display==='block'?'none':'block'">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div id="mobileMenu" class="mobile-menu">
+  <ul>
+    <li><a href="../index.html"        onclick="document.getElementById('mobileMenu').style.display='none'">Home</a></li>
+    <li><a href="german-language.html" onclick="document.getElementById('mobileMenu').style.display='none'">German Language</a></li>
+    <li><a href="services.html"        onclick="document.getElementById('mobileMenu').style.display='none'">Services</a></li>
+    <li><a href="about.html"           onclick="document.getElementById('mobileMenu').style.display='none'">About</a></li>
+    <li><a href="heritage.html"        onclick="document.getElementById('mobileMenu').style.display='none'">Heritage</a></li>
+    <li><a href="news.html"            onclick="document.getElementById('mobileMenu').style.display='none'">News</a></li>
+  </ul>
+  <div class="mobile-menu-btns">
+    <a href="german-language.html#register" style="background:transparent;border:1px solid #C41E3A;color:#fff;padding:10px 22px;font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;">Enroll Now</a>
+    <a href="../index.html#donate" style="background:#C9A84C;color:#080808;padding:10px 20px;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Donate</a>
+  </div>
+</div>
+
+
+<!-- ==================== PAGE HERO ==================== -->
+<div class="page-hero">
+  <div class="page-hero-geo">
+    <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="200" x2="1200" y2="200" stroke="white" stroke-width="0.5"/>
+      <line x1="0" y1="400" x2="1200" y2="400" stroke="white" stroke-width="0.5"/>
+      <line x1="200" y1="0" x2="200" y2="800" stroke="white" stroke-width="0.5"/>
+      <line x1="600" y1="0" x2="600" y2="800" stroke="white" stroke-width="0.5"/>
+      <line x1="1000" y1="0" x2="1000" y2="800" stroke="white" stroke-width="0.5"/>
+    </svg>
+  </div>
+  <div class="page-hero-flag"><div class="f1"></div><div class="f2"></div><div class="f3"></div></div>
+  <div class="page-hero-line"></div>
+  <div class="page-hero-content">
+    <div class="page-hero-tag"><div class="page-hero-dot"></div><div class="page-hero-tag-text">Cameroon · Germany · Heritage</div></div>
+    <h1 class="page-hero-title">Heritage &amp;<br><em>Tourism</em></h1>
+    <p class="page-hero-sub">Discover Cameroon through the lens of its German colonial past — curated tours, heritage sites, and unforgettable experiences.</p>
+  </div>
+</div>
+
+
+<!-- ==================== TOUR CARDS ==================== -->
+<section class="tours-section" id="tours">
+  <div class="s-label">Our Packages</div>
+  <h2 class="s-title">Discover <em>Cameroon</em></h2>
+  <p class="s-sub">Handcrafted tour experiences for Cameroonian explorers and international visitors — all year round.</p>
+
+  <div class="tours-grid">
+
+    <!-- TOUR 1 — TO EDIT: Update each tour card with real details -->
+    <div class="tour-card">
+      <div style="position:relative;overflow:hidden">
+        <div class="tour-img">
+          <!--
+            IMAGE: Mount Cameroon
+            FILE:  assets/images/tourism/mount-cameroon.jpg
+            Replace with: <img src="../assets/images/tourism/mount-cameroon.jpg" alt="Mount Cameroon">
+          -->
+          <div class="tour-img-label">assets/images/tourism/mount-cameroon.jpg</div>
+        </div>
+        <div class="tour-arrow">↗</div>
+      </div>
+      <div class="tour-body">
+        <div class="tour-num">01 / 07</div>
+        <h3 class="tour-title">Mount Cameroon Guided Experience</h3>
+        <p class="tour-desc">Trek Africa's most active volcano with expert bilingual guides. Customizable trails for all fitness levels — from base day hikes to multi-day summit expeditions.</p>
+        <div class="tour-meta">
+          <span class="tour-tag">1–3 Days</span>
+          <span class="tour-tag">All Levels</span>
+          <span class="tour-tag">Guided</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOUR 2 -->
+    <div class="tour-card">
+      <div style="position:relative;overflow:hidden">
+        <div class="tour-img">
+          <!--
+            FILE: assets/images/tourism/botanic-garden.jpg
+          -->
+          <div class="tour-img-label">assets/images/tourism/botanic-garden.jpg</div>
+        </div>
+        <div class="tour-arrow">↗</div>
+      </div>
+      <div class="tour-body">
+        <div class="tour-num">02 / 07</div>
+        <h3 class="tour-title">Limbe Botanic Garden Heritage Walk</h3>
+        <p class="tour-desc">Stroll through Cameroon's oldest botanical garden — established during the German colonial era — with a guided tour that traces its rich history and biodiversity.</p>
+        <div class="tour-meta">
+          <span class="tour-tag">Half Day</span>
+          <span class="tour-tag">Cultural</span>
+          <span class="tour-tag">Family-Friendly</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOUR 3 -->
+    <div class="tour-card">
+      <div style="position:relative;overflow:hidden">
+        <div class="tour-img">
+          <!-- FILE: assets/images/tourism/coastal-village.jpg -->
+          <div class="tour-img-label">assets/images/tourism/coastal-village.jpg</div>
+        </div>
+        <div class="tour-arrow">↗</div>
+      </div>
+      <div class="tour-body">
+        <div class="tour-num">03 / 07</div>
+        <h3 class="tour-title">Coastal &amp; Fishing Village Tour</h3>
+        <p class="tour-desc">Explore authentic Cameroonian coastal communities, sample fresh seafood, and witness the traditional fishing culture that has defined this coastline for generations.</p>
+        <div class="tour-meta">
+          <span class="tour-tag">Full Day</span>
+          <span class="tour-tag">Cultural</span>
+          <span class="tour-tag">Gastronomy</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOUR 4 -->
+    <div class="tour-card">
+      <div style="position:relative;overflow:hidden">
+        <div class="tour-img">
+          <!-- FILE: assets/images/tourism/german-lighthouse.jpg -->
+          <div class="tour-img-label">assets/images/tourism/german-lighthouse.jpg</div>
+        </div>
+        <div class="tour-arrow">↗</div>
+      </div>
+      <div class="tour-body">
+        <div class="tour-num">04 / 07</div>
+        <h3 class="tour-title">German Lighthouse &amp; Colonial Architecture</h3>
+        <p class="tour-desc">Visit surviving German-built lighthouses and colonial-era buildings that dot the Cameroonian coastline — a tangible connection to the 1884–1914 era.</p>
+        <div class="tour-meta">
+          <span class="tour-tag">Full Day</span>
+          <span class="tour-tag">Historical</span>
+          <span class="tour-tag">Photography</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOUR 5 -->
+    <div class="tour-card">
+      <div style="position:relative;overflow:hidden">
+        <div class="tour-img">
+          <!-- FILE: assets/images/tourism/mangrove-trail.jpg -->
+          <div class="tour-img-label">assets/images/tourism/mangrove-trail.jpg</div>
+        </div>
+        <div class="tour-arrow">↗</div>
+      </div>
+      <div class="tour-body">
+        <div class="tour-num">05 / 07</div>
+        <h3 class="tour-title">Mangrove Trail &amp; Wildlife Walk</h3>
+        <p class="tour-desc">Paddle and walk through the lush mangrove ecosystems around Limbe — rich in bird life, marine animals, and some of the most unique flora in West Africa.</p>
+        <div class="tour-meta">
+          <span class="tour-tag">Half Day</span>
+          <span class="tour-tag">Nature</span>
+          <span class="tour-tag">Wildlife</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOUR 6 -->
+    <div class="tour-card">
+      <div style="position:relative;overflow:hidden">
+        <div class="tour-img">
+          <!-- FILE: assets/images/tourism/wildlife-centre.jpg -->
+          <div class="tour-img-label">assets/images/tourism/wildlife-centre.jpg</div>
+        </div>
+        <div class="tour-arrow">↗</div>
+      </div>
+      <div class="tour-body">
+        <div class="tour-num">06 / 07</div>
+        <h3 class="tour-title">Limbe Wildlife Centre Visit</h3>
+        <p class="tour-desc">Home to rescued primates, reptiles, and rare species — the Limbe Wildlife Centre is a world-class conservation facility and an unforgettable experience for all ages.</p>
+        <div class="tour-meta">
+          <span class="tour-tag">Half Day</span>
+          <span class="tour-tag">Conservation</span>
+          <span class="tour-tag">Family</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOUR 7 -->
+    <div class="tour-card">
+      <div style="position:relative;overflow:hidden">
+        <div class="tour-img">
+          <!-- FILE: assets/images/tourism/waterfalls.jpg -->
+          <div class="tour-img-label">assets/images/tourism/waterfalls.jpg</div>
+        </div>
+        <div class="tour-arrow">↗</div>
+      </div>
+      <div class="tour-body">
+        <div class="tour-num">07 / 07</div>
+        <h3 class="tour-title">Waterfalls &amp; Lakes Excursion</h3>
+        <p class="tour-desc">Journey to the stunning waterfalls and crater lakes of the Cameroon highlands — dramatic landscapes carved by volcanic activity and framed by tropical forest.</p>
+        <div class="tour-meta">
+          <span class="tour-tag">Full Day</span>
+          <span class="tour-tag">Adventure</span>
+          <span class="tour-tag">Scenic</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ==================== HERITAGE STORY ==================== -->
+<section class="heritage-story">
+  <div class="heritage-story-grid">
+    <div class="heritage-story-text">
+      <div class="s-label">The Connection</div>
+      <h2 class="s-title" style="color:var(--white)">Germany &amp; Cameroon — A <em>Shared History</em></h2>
+      <p>From 1884 to 1916, present-day Cameroon was the German protectorate of <strong>Kamerun</strong>. During this era, German engineers, architects, missionaries, and administrators left a profound mark on the country — in its infrastructure, its architecture, and in the very names of its places.</p>
+      <p>The city of Limbe was originally named <strong>Victoria</strong>. It was Engineer Limburg — the German colonial engineer whose protection of the local freshwater river earned him legendary status among residents — who gave the river its name. In 1982, by presidential decree, the city of Victoria was renamed <strong>Limbe</strong> in honor of that river and its German protector.</p>
+      <p>The <strong>Limburg German Cultural Center</strong> was built on this legacy — to preserve it, share it, and use it as a foundation for genuine cultural exchange between two nations bound by history.</p>
+      <a href="about.html" class="btn-white-outline" style="margin-top:12px;display:inline-block">Our Full Story →</a>
+    </div>
+    <div class="heritage-visual">
+      <div class="heritage-img-main">
+        <!--
+          HERITAGE MAIN IMAGE: German colonial era photo or building
+          FILE: assets/images/tourism/heritage-main.jpg
+          Replace with: <img src="../assets/images/tourism/heritage-main.jpg" alt="German Colonial Heritage">
+        -->
+        assets/images/tourism/heritage-main.jpg
+      </div>
+      <div class="heritage-img-row">
+        <div class="heritage-img-sm">
+          <!-- FILE: assets/images/tourism/heritage-sm-1.jpg -->
+        </div>
+        <div class="heritage-img-sm">
+          <!-- FILE: assets/images/tourism/heritage-sm-2.jpg -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==================== COLONIAL HERITAGE SITES ==================== -->
+<section class="sites-section">
+  <div class="s-label">On-Site Discoveries</div>
+  <h2 class="s-title">Colonial Heritage <em>Sites</em></h2>
+  <p class="s-sub">Key historical landmarks across Cameroon that tell the story of the German era.</p>
+  <div class="sites-grid">
+    <!-- TO EDIT: Update site names, eras, and descriptions -->
+    <div class="site-card">
+      <div class="site-icon">🏛️</div>
+      <div class="site-era">1884 – 1916</div>
+      <div class="site-title">German Governor's Palace, Buea</div>
+      <p class="site-desc">The former seat of German colonial administration — an imposing hilltop building that overlooks the slopes of Mount Cameroon and remains a key historical landmark.</p>
+    </div>
+    <div class="site-card">
+      <div class="site-icon">💡</div>
+      <div class="site-era">1890s</div>
+      <div class="site-title">Limbe Lighthouse</div>
+      <p class="site-desc">A surviving German-built lighthouse that guided ships into Victoria Harbor — one of the few intact colonial navigation structures on the West African coast.</p>
+    </div>
+    <div class="site-card">
+      <div class="site-icon">🌿</div>
+      <div class="site-era">1892</div>
+      <div class="site-title">Limbe Botanic Garden</div>
+      <p class="site-desc">Established by the Germans as a research and agricultural station, the garden is now one of Africa's most important botanical sites — preserving thousands of plant species.</p>
+    </div>
+    <div class="site-card">
+      <div class="site-icon">⛪</div>
+      <div class="site-era">1900s</div>
+      <div class="site-title">Basel Mission Houses</div>
+      <p class="site-desc">German missionary architecture that dots the landscape of the South West Region — built stone structures that have outlasted the colonial era and continue to serve their communities.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==================== BOOK A TOUR CTA ==================== -->
+<div class="packages-section">
+  <div class="packages-inner">
+    <div class="packages-text">
+      <div class="s-label">Ready to Explore?</div>
+      <h2 class="s-title">Book Your <em>Tour</em></h2>
+      <!-- TO EDIT: Update call-to-action text -->
+      <p class="s-sub">Contact us to tailor a tour package that fits your interests, schedule, and group size. German-speaking guides available.</p>
+    </div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;flex-shrink:0">
+      <a href="contact.html" class="btn-donate" style="font-size:13px;padding:16px 40px">Book Now →</a>
+      <a href="contact.html" class="btn-white-outline" style="font-size:11px;padding:16px 28px">Ask a Question</a>
+    </div>
+  </div>
+</div>
+
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a class="nav-logo" href="../index.html" style="text-decoration:none">
+        <div class="logo-emblem"><span>L</span></div>
+        <div class="logo-text"><strong>Limburg</strong><span>German Cultural Center</span></div>
+      </a>
+      <p>Bridging Cameroon and Germany through language, culture, and real opportunity.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Tours</h5>
+      <ul>
+        <li><a href="#tours">All Packages</a></li>
+        <li><a href="#tours">Mount Cameroon</a></li>
+        <li><a href="#tours">Botanic Garden</a></li>
+        <li><a href="#tours">Coastal Village</a></li>
+        <li><a href="#tours">Colonial Sites</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Quick Links</h5>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="german-language.html">German Language</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="tel:+237678001127">678 001 127</a></li>
+        <li><a href="mailto:info@limburggermanculturalcenter.cm">info@limburggcc.cm</a></li>
+        <li><a href="contact.html">Isokolo, Limbe</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Limburg German Cultural Center — All Rights Reserved</p>
+    <div class="footer-flags">
+      <div class="flag" title="Germany"><span style="background:#1a1a1a;border:1px solid rgba(255,255,255,0.12)"></span><span style="background:#C41E3A"></span><span style="background:#C9A84C"></span></div>
+      <div class="flag" title="Cameroon"><span style="background:#007A5E"></span><span style="background:#CE1126"></span><span style="background:#FCD116"></span></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+  a.addEventListener('click', function(e) {
+    var id = a.getAttribute('href').replace('#','');
+    if (!id) return;
+    var el = document.getElementById(id);
+    if (!el) return;
+    e.preventDefault();
+    el.scrollIntoView({ behavior:'smooth', block:'start' });
+    setTimeout(function(){ window.scrollBy(0,-76); }, 10);
+  });
+});
+</script>
+</body>
+</html>

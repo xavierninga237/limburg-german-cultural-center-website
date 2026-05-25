@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>News &amp; Events — Limburg German Cultural Center</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/shared.css">
+<style>
+/* =============================================================
+   NEWS PAGE — page-specific styles
+   ============================================================= */
+
+/* ── HERO ── */
+.page-hero {
+  background-size: cover;
+  background-position: center center;
+  /* background-image: url('../assets/images/hero/building.jpg'); */
+}
+
+/* ── FILTER BAR ── */
+.filter-bar {
+  background: var(--black); border-bottom: 1px solid var(--border);
+  padding: 0; overflow-x: auto; -webkit-overflow-scrolling: touch;
+}
+.filter-inner { display: flex; min-width: max-content; }
+.filter-btn {
+  padding: 18px 28px; font-size: 11px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(255,255,255,0.4); border: none; border-right: 1px solid var(--border);
+  background: transparent; cursor: pointer; transition: all 0.2s;
+  font-family: 'Outfit', sans-serif; white-space: nowrap;
+}
+.filter-btn:hover, .filter-btn.active { color: #fff; background: rgba(196,30,58,0.12); }
+
+/* ── NEWS GRID ── */
+.news-section { background: var(--white); }
+.news-main-grid {
+  display: grid; grid-template-columns: 5fr 3fr; gap: 24px; margin-bottom: 60px;
+}
+
+/* Featured / hero article */
+.featured-article {
+  background: var(--black); position: relative; overflow: hidden;
+  min-height: 480px; display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 48px; cursor: pointer;
+}
+.featured-article::before {
+  content: '';
+  position: absolute; inset: 0;
+  /* Dark gradient so text sits above the background image */
+  background: linear-gradient(to top, rgba(8,8,8,0.95) 0%, rgba(8,8,8,0.5) 60%, rgba(8,8,8,0.2) 100%);
+  z-index: 1;
+}
+/*
+  FEATURED ARTICLE BACKGROUND IMAGE
+  FILE: assets/images/news/featured.jpg
+  Add to the element inline or uncomment:
+  .featured-article { background-image: url('../assets/images/news/featured.jpg'); background-size: cover; }
+*/
+.featured-article-content { position: relative; z-index: 2; }
+.article-tag   { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red2); margin-bottom: 12px; display: inline-block; }
+.featured-article h2 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: #fff; line-height: 1.3; margin-bottom: 12px; }
+.featured-article p  { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.7; font-weight: 300; margin-bottom: 20px; }
+.article-meta  { font-size: 11px; color: rgba(255,255,255,0.3); letter-spacing: 0.06em; }
+
+/* Sidebar news stack */
+.news-sidebar { display: flex; flex-direction: column; gap: 1px; background: var(--off); }
+.news-card-sm {
+  background: var(--white); padding: 24px;
+  text-decoration: none; display: block; transition: background 0.2s;
+}
+.news-card-sm:hover { background: var(--black); }
+.news-card-sm:hover .nc-title { color: #fff; }
+.news-card-sm:hover .nc-date  { color: rgba(255,255,255,0.3); }
+.nc-date   { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); margin-bottom: 8px; transition: color 0.2s; }
+.nc-tag    { display: inline-block; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red); background: rgba(196,30,58,0.07); padding: 3px 8px; margin-bottom: 8px; }
+.nc-title  { font-size: 14px; font-weight: 500; color: var(--black); line-height: 1.5; transition: color 0.2s; }
+
+/* All articles grid */
+.articles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.article-card  { display: flex; flex-direction: column; border: 1px solid var(--border-light); transition: transform 0.3s; }
+.article-card:hover { transform: translateY(-4px); }
+.article-card:hover .ac-title { color: var(--red); }
+
+/* Article card image slot */
+.ac-img {
+  width: 100%; aspect-ratio: 16/9;
+  background: var(--off); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; color: rgba(0,0,0,0.2); letter-spacing: 0.1em;
+  text-transform: uppercase; overflow: hidden; position: relative;
+}
+/*
+  ARTICLE IMAGE FILES:
+  Use: assets/images/news/article-1.jpg, article-2.jpg, etc.
+  Replace each .ac-img placeholder div with:
+  <img src="../assets/images/news/article-1.jpg" alt="Article title">
+*/
+.ac-body  { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+.ac-tag   { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red); margin-bottom: 10px; }
+.ac-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; color: var(--black); line-height: 1.35; margin-bottom: 10px; transition: color 0.2s; }
+.ac-excerpt { font-size: 13px; color: var(--gray); line-height: 1.65; font-weight: 300; flex: 1; }
+.ac-footer  { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border-light); }
+.ac-date    { font-size: 11px; color: var(--gray); }
+.ac-read    { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red); }
+
+/* ── UPCOMING EVENTS ── */
+.events-section { background: var(--black2); }
+.events-section .s-title { color: var(--white); }
+.events-section .s-sub   { color: rgba(255,255,255,0.4); }
+.events-list { margin-top: 56px; display: flex; flex-direction: column; gap: 1px; }
+.event-item {
+  display: grid; grid-template-columns: 80px 1fr auto;
+  gap: 32px; align-items: center; padding: 28px 32px;
+  background: rgba(255,255,255,0.03); border-left: 3px solid transparent;
+  transition: all 0.3s;
+}
+.event-item:hover { background: rgba(255,255,255,0.06); border-left-color: var(--red); }
+.event-date-block { text-align: center; }
+.event-day  { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 600; color: var(--red); line-height: 1; display: block; }
+.event-month { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+.event-title { font-size: 16px; font-weight: 500; color: #fff; margin-bottom: 6px; }
+.event-desc  { font-size: 13px; color: rgba(255,255,255,0.4); font-weight: 300; line-height: 1.5; }
+.event-time  { font-size: 12px; color: rgba(255,255,255,0.3); margin-top: 4px; }
+.event-cta   { display: inline-block; padding: 10px 22px; border: 1px solid rgba(255,255,255,0.2); font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.55); transition: all 0.2s; white-space: nowrap; }
+.event-cta:hover { background: var(--red); border-color: var(--red); color: #fff; }
+
+/* ── NEWSLETTER ── */
+.newsletter-section { background: var(--red); padding: 80px 6%; }
+.newsletter-inner   { display: flex; justify-content: space-between; align-items: center; gap: 48px; flex-wrap: wrap; }
+.newsletter-section .s-label { color: rgba(255,255,255,0.6); }
+.newsletter-section .s-label::before { background: rgba(255,255,255,0.4); }
+.newsletter-section .s-title { color: #fff; margin-bottom: 8px; }
+.newsletter-section .s-sub   { color: rgba(255,255,255,0.7); }
+.newsletter-form { display: flex; gap: 0; flex-shrink: 0; }
+.newsletter-input {
+  padding: 14px 20px; border: 1px solid rgba(255,255,255,0.3); border-right: none;
+  background: rgba(255,255,255,0.1); color: #fff; font-size: 13px;
+  font-family: 'Outfit', sans-serif; outline: none; min-width: 280px;
+}
+.newsletter-input::placeholder { color: rgba(255,255,255,0.45); }
+.newsletter-btn {
+  padding: 14px 28px; background: var(--black); color: #fff;
+  border: none; font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; font-family: 'Outfit', sans-serif; cursor: pointer; transition: background 0.3s;
+}
+.newsletter-btn:hover { background: var(--black2); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .news-main-grid { grid-template-columns: 1fr; }
+  .articles-grid  { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .articles-grid  { grid-template-columns: 1fr; }
+  .event-item     { grid-template-columns: 60px 1fr; }
+  .event-cta      { display: none; }
+  .newsletter-form { flex-direction: column; width: 100%; }
+  .newsletter-input { min-width: auto; width: 100%; border-right: 1px solid rgba(255,255,255,0.3); border-bottom: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== NAVIGATION ==================== -->
+<nav id="navbar">
+  <a class="nav-logo" href="../index.html">
+    <div class="logo-emblem"><span>L</span></div>
+    <div class="logo-text"><strong>Limburg</strong><span>German Cultural Center</span></div>
+  </a>
+  <ul class="nav-menu">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="german-language.html">German Language</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="heritage.html">Heritage</a></li>
+    <li><a href="news.html" class="active">News</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="german-language.html#register" class="nav-btn">Enroll Now</a>
+    <a href="../index.html#donate" class="nav-donate">Donate</a>
+  </div>
+  <button class="nav-hamburger" id="hamburger" aria-label="Open menu"
+    onclick="var d=document.getElementById('mobileMenu');d.style.display=d.style.display==='block'?'none':'block'">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div id="mobileMenu" class="mobile-menu">
+  <ul>
+    <li><a href="../index.html"        onclick="document.getElementById('mobileMenu').style.display='none'">Home</a></li>
+    <li><a href="german-language.html" onclick="document.getElementById('mobileMenu').style.display='none'">German Language</a></li>
+    <li><a href="services.html"        onclick="document.getElementById('mobileMenu').style.display='none'">Services</a></li>
+    <li><a href="about.html"           onclick="document.getElementById('mobileMenu').style.display='none'">About</a></li>
+    <li><a href="heritage.html"        onclick="document.getElementById('mobileMenu').style.display='none'">Heritage</a></li>
+    <li><a href="news.html"            onclick="document.getElementById('mobileMenu').style.display='none'">News</a></li>
+  </ul>
+  <div class="mobile-menu-btns">
+    <a href="german-language.html#register" style="background:transparent;border:1px solid #C41E3A;color:#fff;padding:10px 22px;font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;">Enroll Now</a>
+    <a href="../index.html#donate" style="background:#C9A84C;color:#080808;padding:10px 20px;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Donate</a>
+  </div>
+</div>
+
+<!-- ==================== PAGE HERO ==================== -->
+<div class="page-hero">
+  <div class="page-hero-geo">
+    <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="200" x2="1200" y2="200" stroke="white" stroke-width="0.5"/>
+      <line x1="0" y1="400" x2="1200" y2="400" stroke="white" stroke-width="0.5"/>
+      <line x1="200" y1="0" x2="200" y2="800" stroke="white" stroke-width="0.5"/>
+      <line x1="600" y1="0" x2="600" y2="800" stroke="white" stroke-width="0.5"/>
+      <line x1="1000" y1="0" x2="1000" y2="800" stroke="white" stroke-width="0.5"/>
+    </svg>
+  </div>
+  <div class="page-hero-flag"><div class="f1"></div><div class="f2"></div><div class="f3"></div></div>
+  <div class="page-hero-line"></div>
+  <div class="page-hero-content">
+    <div class="page-hero-tag"><div class="page-hero-dot"></div><div class="page-hero-tag-text">Stay Informed</div></div>
+    <h1 class="page-hero-title">News &amp; <em>Events</em></h1>
+    <p class="page-hero-sub">The latest from the Limburg German Cultural Center — news, announcements, panel discussions, and upcoming events.</p>
+  </div>
+</div>
+
+<!-- Filter bar -->
+<nav class="filter-bar" aria-label="Filter by category">
+  <div class="filter-inner">
+    <!-- TO EDIT: Add or remove filter buttons as needed -->
+    <button class="filter-btn active" onclick="filterNews(this,'all')">All</button>
+    <button class="filter-btn" onclick="filterNews(this,'news')">News</button>
+    <button class="filter-btn" onclick="filterNews(this,'events')">Events</button>
+    <button class="filter-btn" onclick="filterNews(this,'language')">Language School</button>
+    <button class="filter-btn" onclick="filterNews(this,'culture')">Culture</button>
+    <button class="filter-btn" onclick="filterNews(this,'tourism')">Tourism</button>
+  </div>
+</nav>
+
+
+<!-- ==================== FEATURED + SIDEBAR ==================== -->
+<section class="news-section" id="latest">
+  <div class="s-label">Latest Updates</div>
+  <h2 class="s-title">What's <em>Happening</em></h2>
+
+  <div class="news-main-grid" style="margin-top:48px">
+
+    <!-- Featured article -->
+    <div class="featured-article" style="
+      /*
+        FEATURED ARTICLE BACKGROUND IMAGE
+        FILE: assets/images/news/featured.jpg
+        Uncomment the line below after placing the image:
+        background-image: url('../assets/images/news/featured.jpg');
+        background-size: cover; background-position: center;
+      */
+    ">
+      <div class="featured-article-content">
+        <!-- TO EDIT: Update tag, date, headline, and excerpt -->
+        <span class="article-tag">Official Visit</span>
+        <h2>Limburg German Cultural Center Hosts Landmark German-Cameroonian Cultural Delegation</h2>
+        <p>A high-level delegation from Germany visited the center to explore new partnerships in language education, vocational training, and cultural exchange — a milestone moment for German-Cameroon bilateral cooperation in Limbe.</p>
+        <div class="article-meta">March 2026 &nbsp;·&nbsp; 4 min read</div>
+      </div>
+    </div>
+
+    <!-- Sidebar news -->
+    <div class="news-sidebar">
+      <!-- TO EDIT: Update each small news card with real content -->
+      <a class="news-card-sm" href="#">
+        <div class="nc-date">April 2026</div>
+        <div class="nc-tag">Language School</div>
+        <div class="nc-title">May 2026 Cohort Registration Now Open — A1 to B2 Spots Available</div>
+      </a>
+      <a class="news-card-sm" href="#">
+        <div class="nc-date">March 2026</div>
+        <div class="nc-tag">Events</div>
+        <div class="nc-title">Monthly Panel Discussion: Germany's Skilled Worker Immigration Act — What It Means for Cameroonians</div>
+      </a>
+      <a class="news-card-sm" href="#">
+        <div class="nc-date">March 2026</div>
+        <div class="nc-tag">Culture</div>
+        <div class="nc-title">German Heritage Night at Haus der Freundschaft — An Evening of Food, Music &amp; History</div>
+      </a>
+      <a class="news-card-sm" href="#">
+        <div class="nc-date">February 2026</div>
+        <div class="nc-tag">Tourism</div>
+        <div class="nc-title">Limburg Tourism Office Launches First Mount Cameroon Package for German Visitors</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Article grid -->
+  <div class="articles-grid">
+
+    <!-- ARTICLE 1 — TO EDIT: Duplicate this block to add more articles -->
+    <div class="article-card" data-category="language">
+      <div class="ac-img">
+        <!--
+          FILE: assets/images/news/article-1.jpg
+          Replace this div with: <img src="../assets/images/news/article-1.jpg" alt="B1 Exam Prep">
+        -->
+        assets/images/news/article-1.jpg
+      </div>
+      <div class="ac-body">
+        <div class="ac-tag">Language School</div>
+        <h3 class="ac-title">B1 Exam Preparation Workshop — April Cohort Achieves 94% Pass Rate</h3>
+        <p class="ac-excerpt">Our intensive B1 preparation program continues to deliver outstanding results. Learn about the strategies our instructors use and how to join the next cohort.</p>
+        <div class="ac-footer">
+          <span class="ac-date">April 2026</span>
+          <span class="ac-read">Read More →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARTICLE 2 -->
+    <div class="article-card" data-category="culture">
+      <div class="ac-img">
+        <!-- FILE: assets/images/news/article-2.jpg -->
+        assets/images/news/article-2.jpg
+      </div>
+      <div class="ac-body">
+        <div class="ac-tag">Culture</div>
+        <h3 class="ac-title">New Exhibit Opens in the Historical Photo Gallery — German Colonial Limbe in Focus</h3>
+        <p class="ac-excerpt">A new collection of rarely seen photographs from the 1900–1914 period has been added to the gallery, offering fresh insight into daily life during the German colonial era.</p>
+        <div class="ac-footer">
+          <span class="ac-date">March 2026</span>
+          <span class="ac-read">Read More →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARTICLE 3 -->
+    <div class="article-card" data-category="events">
+      <div class="ac-img">
+        <!-- FILE: assets/images/news/article-3.jpg -->
+        assets/images/news/article-3.jpg
+      </div>
+      <div class="ac-body">
+        <div class="ac-tag">Events</div>
+        <h3 class="ac-title">Panel Discussion Recap: Ausbildung in Germany — Opportunities for Young Cameroonians</h3>
+        <p class="ac-excerpt">Over 80 participants attended our March panel on vocational pathways to Germany. Key takeaways and the next session date are now available.</p>
+        <div class="ac-footer">
+          <span class="ac-date">March 2026</span>
+          <span class="ac-read">Read More →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARTICLE 4 -->
+    <div class="article-card" data-category="tourism">
+      <div class="ac-img">
+        <!-- FILE: assets/images/news/article-4.jpg -->
+        assets/images/news/article-4.jpg
+      </div>
+      <div class="ac-body">
+        <div class="ac-tag">Tourism</div>
+        <h3 class="ac-title">First Group of German Tourists Completes the Mount Cameroon Heritage Trail</h3>
+        <p class="ac-excerpt">Eight visitors from Berlin completed a five-day cultural and trekking package organized by our tourism office — the first of many planned monthly groups.</p>
+        <div class="ac-footer">
+          <span class="ac-date">February 2026</span>
+          <span class="ac-read">Read More →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARTICLE 5 -->
+    <div class="article-card" data-category="news">
+      <div class="ac-img">
+        <!-- FILE: assets/images/news/article-5.jpg -->
+        assets/images/news/article-5.jpg
+      </div>
+      <div class="ac-body">
+        <div class="ac-tag">News</div>
+        <h3 class="ac-title">Limburg Center Signs MOU with Three German Vocational Training Institutions</h3>
+        <p class="ac-excerpt">A landmark agreement paves the way for direct placement programs connecting Cameroonian vocational graduates with German employers in the hospitality, IT, and care sectors.</p>
+        <div class="ac-footer">
+          <span class="ac-date">February 2026</span>
+          <span class="ac-read">Read More →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARTICLE 6 -->
+    <div class="article-card" data-category="culture">
+      <div class="ac-img">
+        <!-- FILE: assets/images/news/article-6.jpg -->
+        assets/images/news/article-6.jpg
+      </div>
+      <div class="ac-body">
+        <div class="ac-tag">Culture</div>
+        <h3 class="ac-title">Haus der Freundschaft Opens — Bundesliga Live Every Weekend</h3>
+        <p class="ac-excerpt">The center's café-restaurant officially welcomed its first guests, with Bundesliga matches screened live every Saturday and Sunday from 3 PM. German and Cameroonian cuisine served daily.</p>
+        <div class="ac-footer">
+          <span class="ac-date">February 2026</span>
+          <span class="ac-read">Read More →</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ==================== UPCOMING EVENTS ==================== -->
+<section class="events-section" id="upcoming">
+  <div class="s-label">Agenda</div>
+  <h2 class="s-title" style="color:var(--white)">Upcoming <em>Events</em></h2>
+  <p class="s-sub">Mark your calendar — monthly panel discussions, cultural nights, and workshops.</p>
+
+  <div class="events-list">
+    <!-- TO EDIT: Replace with real upcoming events. Format: Day / Month / Title / Description / Time -->
+
+    <div class="event-item">
+      <div class="event-date-block">
+        <span class="event-day">12</span>
+        <span class="event-month">May</span>
+      </div>
+      <div>
+        <div class="event-title">Panel Discussion: Germany's New Skilled Worker Immigration Act</div>
+        <p class="event-desc">What the 2024 immigration reform means for Cameroonians seeking to study and work in Germany. Expert speakers from the German embassy and local employers.</p>
+        <div class="event-time">18:00 – 20:00 · Limburg Cultural Center, Isokolo, Limbe</div>
+      </div>
+      <a href="contact.html" class="event-cta">Register →</a>
+    </div>
+
+    <div class="event-item">
+      <div class="event-date-block">
+        <span class="event-day">18</span>
+        <span class="event-month">May</span>
+      </div>
+      <div>
+        <div class="event-title">German Heritage Cultural Night</div>
+        <p class="event-desc">An evening celebrating German culture in Cameroon — traditional music, cuisine from the Haus der Freundschaft, and a special gallery exhibition opening.</p>
+        <div class="event-time">19:00 – 22:00 · Haus der Freundschaft, Limburg Center</div>
+      </div>
+      <a href="contact.html" class="event-cta">Register →</a>
+    </div>
+
+    <div class="event-item">
+      <div class="event-date-block">
+        <span class="event-day">25</span>
+        <span class="event-month">May</span>
+      </div>
+      <div>
+        <div class="event-title">Open Day — German Language School &amp; Vocational Training</div>
+        <p class="event-desc">Prospective students are invited to visit the school, meet teachers, sit in on a demo class, and learn about the registration process for the June 2026 cohort.</p>
+        <div class="event-time">09:00 – 14:00 · Limburg Cultural Center, Isokolo, Limbe</div>
+      </div>
+      <a href="contact.html" class="event-cta">Register →</a>
+    </div>
+
+    <div class="event-item">
+      <div class="event-date-block">
+        <span class="event-day">08</span>
+        <span class="event-month">Jun</span>
+      </div>
+      <div>
+        <div class="event-title">Business Networking Evening — German-Cameroonian Entrepreneurs</div>
+        <p class="event-desc">Connect with German companies operating in Cameroon, local entrepreneurs, and development partners over dinner at the Haus der Freundschaft.</p>
+        <div class="event-time">18:30 – 21:00 · Haus der Freundschaft, Limburg Center</div>
+      </div>
+      <a href="contact.html" class="event-cta">Register →</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ==================== NEWSLETTER ==================== -->
+<div class="newsletter-section">
+  <div class="newsletter-inner">
+    <div>
+      <div class="s-label">Stay Connected</div>
+      <h2 class="s-title">Subscribe to Our <em>Newsletter</em></h2>
+      <!-- TO EDIT: Update newsletter description -->
+      <p class="s-sub">Get event announcements, enrollment reminders, and cultural news delivered to your inbox — in French and English.</p>
+    </div>
+    <div>
+      <!-- TO EDIT: Update form action to your real email service endpoint -->
+      <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+        <input type="email" class="newsletter-input" placeholder="your@email.com" required>
+        <button type="submit" class="newsletter-btn">Subscribe →</button>
+      </form>
+      <p style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:10px">No spam. Unsubscribe at any time.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a class="nav-logo" href="../index.html" style="text-decoration:none">
+        <div class="logo-emblem"><span>L</span></div>
+        <div class="logo-text"><strong>Limburg</strong><span>German Cultural Center</span></div>
+      </a>
+      <p>Bridging Cameroon and Germany through language, culture, and real opportunity.</p>
+    </div>
+    <div class="footer-col">
+      <h5>News</h5>
+      <ul>
+        <li><a href="#latest">Latest News</a></li>
+        <li><a href="#upcoming">Upcoming Events</a></li>
+        <li><a href="#latest">Language School</a></li>
+        <li><a href="#latest">Cultural Events</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Quick Links</h5>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="german-language.html">German Language</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="heritage.html">Heritage</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="tel:+237678001127">678 001 127</a></li>
+        <li><a href="mailto:info@limburggermanculturalcenter.cm">info@limburggcc.cm</a></li>
+        <li><a href="contact.html">Isokolo, Limbe</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Limburg German Cultural Center — All Rights Reserved</p>
+    <div class="footer-flags">
+      <div class="flag" title="Germany"><span style="background:#1a1a1a;border:1px solid rgba(255,255,255,0.12)"></span><span style="background:#C41E3A"></span><span style="background:#C9A84C"></span></div>
+      <div class="flag" title="Cameroon"><span style="background:#007A5E"></span><span style="background:#CE1126"></span><span style="background:#FCD116"></span></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── Filter news articles by category ─────────────────────────
+   Clicking a filter button shows/hides .article-card elements
+   based on their data-category attribute.
+   TO ADD A NEW CATEGORY: add data-category="yourcategory" to the
+   .article-card and add a matching .filter-btn button.
+   ────────────────────────────────────────────────────────────── */
+function filterNews(btn, category) {
+  /* Update active button */
+  document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+
+  /* Show / hide articles */
+  document.querySelectorAll('.article-card').forEach(function(card) {
+    if (category === 'all' || card.dataset.category === category) {
+      card.style.display = 'flex';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+/* ── Newsletter form handler ───────────────────────────────────
+   TO EDIT: Replace the alert with a real API call to your
+   email marketing service (Mailchimp, Brevo, etc.)
+   ────────────────────────────────────────────────────────────── */
+function handleNewsletterSubmit(e) {
+  e.preventDefault();
+  var email = e.target.querySelector('input[type="email"]').value;
+  /* TODO: Send email to your email list service */
+  alert('Thank you! ' + email + ' has been subscribed to our newsletter.');
+  e.target.reset();
+}
+
+/* Smooth scroll */
+document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+  a.addEventListener('click', function(e) {
+    var id = a.getAttribute('href').replace('#','');
+    if (!id) return;
+    var el = document.getElementById(id);
+    if (!el) return;
+    e.preventDefault();
+    el.scrollIntoView({ behavior:'smooth', block:'start' });
+    setTimeout(function(){ window.scrollBy(0,-76); }, 10);
+  });
+});
+</script>
+</body>
+</html>

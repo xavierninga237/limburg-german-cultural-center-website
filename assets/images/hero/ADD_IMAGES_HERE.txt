@@ -1,0 +1,2 @@
+Place your image files in this folder.
+See IMAGE_REFERENCE.txt in the root for full instructions.

@@ -1,0 +1,61 @@
+as a senior developper you to check those mistake using the following prompt:
+
+-THE HOME PAGE
+first the heros section, the background is suppose to be the picture for the center. so add a section for the image and apply saturation or other filter to make the picture appear dark in the bg.
+
+for the our services section. the view all section is suppose link to the services page and name those images names as germanlanguaschool.jpg, limburgculturalcenterhistorique.jpg etc. or png if better so that it will be good for the seo later.
+
+for the menbership plan. it has to be connected to the whatsapp link with a premade message already good and ready so i will facilate the work of the person who respond to the messages. the same with donation button. link it to this whasapp number:+237 678 001 127
+
+for why choose limburg remove alumni testimonial cus is not justify(— Alumni Testimonial
+"Limburg gave me the language, the network, and the confidence to build a new life in Germany."
+Marie K. — Software Engineer, Munich 2023
+83+
+Alumni in Germany
+3 yrs
+Of excellence
+A1–B2
+Certified levels
+98%
+Visa success rate) remove it because that section is not justify as a real result. with time we will bring it back
+
+for the tourism word ontop of the title cameroon and german heritage. the title can stay the same but remove the word and change it with visit us. that section aim to show a portion of the historical photo gallery. and also change that little text under by something visite our scenter and discover..., remove the all tours with visit us for more or somethings better.
+
+and for the latest news & events i want it to be updated anytime we add news in our post section. and you have to know that the website is not going to be converted to wordpress but instead hosted by code. and each of the news might have one or several images or videos. but only one of them show image went we click on it.and this is how it should be structured.
+(
+we to see 4 news at the time. to see more we need to to have a buttom cta that will iink it to the actual new page where all the news and video will be listed.
+
+and all of those news title have to show image or video of it 
+
+went we click on one news we are redirect to the actual post of the news.
+)
+
+-THE SERVICES PAGE
+
+this page does not have a nav bar. so fix the problem and remove that navigation section at the top.also the same problem with the news and events page. fix the nav bar problem.
+
+-THE NEWS & EVENTS
+
+Latest Updates
+What's Happening section is good but remove that containing (April 2026
+Language School
+May 2026 Cohort Registration Now Open — A1 to B2 Spots Available
+March 2026
+Events
+Monthly Panel Discussion: Germany's Skilled Worker Immigration Act — What It Means for Cameroonians
+March 2026
+Culture
+German Heritage Night at Haus der Freundschaft — An Evening of Food, Music & History
+February 2026
+Tourism
+Limburg Tourism Office Launches First Mount Cameroon Package for German Visitors
+) because for me is useless.instead start from the first sample news which is B1 exam preparation workshop is great so keep that same system for the rest of the others news.
+
+if posible start developing the blog system and foward all the code there so i can manually add post. it should include details like date posted, type of the post like visite, new, preparatition and others. and the content and many valuabe option u thinks it may be good.remove the upcoming events for now, later i will connect it with our calender system.
+and also used json for the data if posible.
+
+the code is to messy try to fix and organize it. one css for all the pages, and i should not be placed in the main index file. same with the js code. and also one footer and others for all the pages. keep clean and well commmented for me to modyfy it later.explain all with a lot of details.
+
+that is all for now. keep the website code good for seo, speed oplink and correct all those broken or non giving link.
+
+make the code easy enaught for me to modify and scale it laterx
